@@ -1,1 +1,1161 @@
-{"header":{"number":2,"previous_hash":"N1vZDx6j1tuU+OkETH1TcM34FrKOJBcvtcAJqVFRMHA=","data_hash":"RPtptQzSF/4l3bArsAuZpfbTzIKuoha8TbPFjEBHIIY="},"transactions":[{"signature":"MEQCIBpIaZog0Xst/PWb8uvf5juwSuhAh4mfIBu3KBrUkzjZAiAaJKSTa6eCDtMc2L1yytiF2Riznf7cMyDiK0Bw7rWglA==","channel_header":{"type":3,"timestamp":{"seconds":1492521565,"nanos":835551053},"channel_id":"ch1","tx_id":"df1e00c96af713814abf09e690405ec4360b8bc0a3cca18f8031ecf2408fdaee","chaincode_id":{"name":"mycc1","version":"0"}},"signature_header":{"Certificate":{"Raw":"MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","RawTBSCertificate":"MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=","RawSubjectPublicKeyInfo":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==","RawSubject":"MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=","RawIssuer":"MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t","Signature":"MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","SignatureAlgorithm":10,"PublicKeyAlgorithm":3,"PublicKey":{"Curve":{"P":115792089210356248762697446949407573530086143415290314195533631308867097853951,"N":115792089210356248762697446949407573529996955224135760342422259061068512044369,"B":41058363725152142129326129780047268409114441015993725554835256314039467401291,"Gx":48439561293906451759052585252797914202762949526041747995844080717082404635286,"Gy":36134250956749795798585127919587881956611106672985015071877198253568414405109,"BitSize":256,"Name":"P-256"},"X":12713421817418932763413718645318291131658429549618161805148108180370161081747,"Y":34338776428353405405758244684264567987888272761951209233206748157655345868530},"Version":3,"SerialNumber":24384531367087201972415224946499269301170097996,"Issuer":{"Country":["US"],"Organization":["Internet Widgets, Inc."],"OrganizationalUnit":["WWW"],"Locality":["San Francisco"],"Province":["California"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"example.com","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"California"},{"Type":[2,5,4,7],"Value":"San Francisco"},{"Type":[2,5,4,10],"Value":"Internet Widgets, Inc."},{"Type":[2,5,4,11],"Value":"WWW"},{"Type":[2,5,4,3],"Value":"example.com"}],"ExtraNames":null},"Subject":{"Country":["US"],"Organization":["Hyperledger Fabric"],"OrganizationalUnit":["COP"],"Locality":["Raleigh"],"Province":["North Carolina"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"North Carolina"},{"Type":[2,5,4,7],"Value":"Raleigh"},{"Type":[2,5,4,10],"Value":"Hyperledger Fabric"},{"Type":[2,5,4,11],"Value":"COP"}],"ExtraNames":null},"NotBefore":"2016-11-11T17:07:00Z","NotAfter":"2017-11-11T17:07:00Z","KeyUsage":5,"Extensions":[{"Id":[2,5,29,15],"Critical":true,"Value":"AwIFoA=="},{"Id":[2,5,29,37],"Critical":false,"Value":"MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="},{"Id":[2,5,29,19],"Critical":true,"Value":"MAA="},{"Id":[2,5,29,14],"Critical":false,"Value":"BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="},{"Id":[2,5,29,35],"Critical":false,"Value":"MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"},{"Id":[2,5,29,17],"Critical":false,"Value":"MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"}],"ExtraExtensions":null,"UnhandledCriticalExtensions":null,"ExtKeyUsage":[1,2],"UnknownExtKeyUsage":null,"BasicConstraintsValid":true,"IsCA":false,"MaxPathLen":-1,"MaxPathLenZero":false,"SubjectKeyId":"4UJ1xRnh6zeW2IKABUOjIt9Wk8g=","AuthorityKeyId":"F2dCPaqegj/ExR2fW8OZ0bWcSBA=","OCSPServer":null,"IssuingCertificateURL":null,"DNSNames":["myhost.com","www.myhost.com"],"EmailAddresses":null,"IPAddresses":null,"PermittedDNSDomainsCritical":false,"PermittedDNSDomains":null,"CRLDistributionPoints":null,"PolicyIdentifiers":null},"nonce":"6TWIgC76z8wzJOE6t0wHUeUmpwj7xpaL"},"tx_action_signature_header":{"Certificate":{"Raw":"MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","RawTBSCertificate":"MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=","RawSubjectPublicKeyInfo":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==","RawSubject":"MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=","RawIssuer":"MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t","Signature":"MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","SignatureAlgorithm":10,"PublicKeyAlgorithm":3,"PublicKey":{"Curve":{"P":115792089210356248762697446949407573530086143415290314195533631308867097853951,"N":115792089210356248762697446949407573529996955224135760342422259061068512044369,"B":41058363725152142129326129780047268409114441015993725554835256314039467401291,"Gx":48439561293906451759052585252797914202762949526041747995844080717082404635286,"Gy":36134250956749795798585127919587881956611106672985015071877198253568414405109,"BitSize":256,"Name":"P-256"},"X":12713421817418932763413718645318291131658429549618161805148108180370161081747,"Y":34338776428353405405758244684264567987888272761951209233206748157655345868530},"Version":3,"SerialNumber":24384531367087201972415224946499269301170097996,"Issuer":{"Country":["US"],"Organization":["Internet Widgets, Inc."],"OrganizationalUnit":["WWW"],"Locality":["San Francisco"],"Province":["California"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"example.com","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"California"},{"Type":[2,5,4,7],"Value":"San Francisco"},{"Type":[2,5,4,10],"Value":"Internet Widgets, Inc."},{"Type":[2,5,4,11],"Value":"WWW"},{"Type":[2,5,4,3],"Value":"example.com"}],"ExtraNames":null},"Subject":{"Country":["US"],"Organization":["Hyperledger Fabric"],"OrganizationalUnit":["COP"],"Locality":["Raleigh"],"Province":["North Carolina"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"North Carolina"},{"Type":[2,5,4,7],"Value":"Raleigh"},{"Type":[2,5,4,10],"Value":"Hyperledger Fabric"},{"Type":[2,5,4,11],"Value":"COP"}],"ExtraNames":null},"NotBefore":"2016-11-11T17:07:00Z","NotAfter":"2017-11-11T17:07:00Z","KeyUsage":5,"Extensions":[{"Id":[2,5,29,15],"Critical":true,"Value":"AwIFoA=="},{"Id":[2,5,29,37],"Critical":false,"Value":"MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="},{"Id":[2,5,29,19],"Critical":true,"Value":"MAA="},{"Id":[2,5,29,14],"Critical":false,"Value":"BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="},{"Id":[2,5,29,35],"Critical":false,"Value":"MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"},{"Id":[2,5,29,17],"Critical":false,"Value":"MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"}],"ExtraExtensions":null,"UnhandledCriticalExtensions":null,"ExtKeyUsage":[1,2],"UnknownExtKeyUsage":null,"BasicConstraintsValid":true,"IsCA":false,"MaxPathLen":-1,"MaxPathLenZero":false,"SubjectKeyId":"4UJ1xRnh6zeW2IKABUOjIt9Wk8g=","AuthorityKeyId":"F2dCPaqegj/ExR2fW8OZ0bWcSBA=","OCSPServer":null,"IssuingCertificateURL":null,"DNSNames":["myhost.com","www.myhost.com"],"EmailAddresses":null,"IPAddresses":null,"PermittedDNSDomainsCritical":false,"PermittedDNSDomains":null,"CRLDistributionPoints":null,"PolicyIdentifiers":null},"nonce":"6TWIgC76z8wzJOE6t0wHUeUmpwj7xpaL"},"chaincode_spec":{"type":1,"chaincode_id":{"name":"mycc1","version":"0"},"input":{"Args":["initMarble","marble1","blue","35","tom"]}},"endorsements":[{"signature_header":{"Certificate":null,"nonce":"LS0tLS1CRUdJTiAtLS0tLQpNSUlDakRDQ0FqS2dBd0lCQWdJVUJFVndzU3gwVG1xZGJ6TndsZU5CQnpvSVQwd3dDZ1lJS29aSXpqMEVBd0l3CmZ6RUxNQWtHQTFVRUJoTUNWVk14RXpBUkJnTlZCQWdUQ2tOaGJHbG1iM0p1YVdFeEZqQVVCZ05WQkFjVERWTmgKYmlCR2NtRnVZMmx6WTI4eEh6QWRCZ05WQkFvVEZrbHVkR1Z5Ym1WMElGZHBaR2RsZEhNc0lFbHVZeTR4RERBSwpCZ05WQkFzVEExZFhWekVVTUJJR0ExVUVBeE1MWlhoaGJYQnNaUzVqYjIwd0hoY05NVFl4TVRFeE1UY3dOekF3CldoY05NVGN4TVRFeE1UY3dOekF3V2pCak1Rc3dDUVlEVlFRR0V3SlZVekVYTUJVR0ExVUVDQk1PVG05eWRHZ2cKUTJGeWIyeHBibUV4RURBT0JnTlZCQWNUQjFKaGJHVnBaMmd4R3pBWkJnTlZCQW9URWtoNWNHVnliR1ZrWjJWeQpJRVpoWW5KcFl6RU1NQW9HQTFVRUN4TURRMDlRTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFCkhCdUtzQU80M2hzNEpHcEZmaUdNa0IveHNJTFRzT3ZtTjJXbXdwc1BIWk5MNnc4SFdlM3hDUFF0ZEcvWEpKdloKK0M3NTZLRXNVQk0zeXc1UFRma3U4cU9CcHpDQnBEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZdwpGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGT0ZDCmRjVVo0ZXMzbHRpQ2dBVkRveUxmVnBQSU1COEdBMVVkSXdRWU1CYUFGQmRuUWoycW5vSS94TVVkbjF2RG1kRzEKbkVnUU1DVUdBMVVkRVFRZU1CeUNDbTE1YUc5emRDNWpiMjJDRG5kM2R5NXRlV2h2YzNRdVkyOXRNQW9HQ0NxRwpTTTQ5QkFNQ0EwZ0FNRVVDSURmOUhibDR4bjN6NEV3TkttaWxNOWxYMkZxNGpXcEFhUlZCOTdPbVZFZXlBaUVBCjI1YURQUUhHR3EyQXZoS1Qwd3Z0MDhjWDFHVEdDSWJmbXVMcE13S1FqMzg9Ci0tLS0tRU5EIC0tLS0tCg=="},"signature":"MEUCIQDm2fXl8w3J+YKQ94wwLnqAOOXfTiv9AOQEYXmK1+QjaAIgVvWVsgvTW3Iq6t3rOWJxUPV11SI/+hq3yU0LGj9Or2A="}],"proposal_hash":"/4yfjwnOH96ghGen04aLhZRHOPCuJK0cUQupAkZtJD8=","events":{},"response":{"status":200},"ns_read_write_Set":[{"Namespace":"lccc","KVRWSet":{"reads":[{"key":"mycc1","version":{"block_num":1,"tx_num":1}}]}},{"Namespace":"mycc1","KVRWSet":{"reads":[{"key":"marble1"}],"writes":[{"key":"\u0000color~name\u0000blue\u0000marble1\u0000","value":"AA=="},{"key":"marble1","value":"eyJkb2NUeXBlIjoibWFyYmxlIiwibmFtZSI6Im1hcmJsZTEiLCJjb2xvciI6ImJsdWUiLCJzaXplIjozNSwib3duZXIiOiJ0b20ifQ=="}]}}]}],"block_creator_signature":{"signature_header":{"Certificate":{"Raw":"MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","RawTBSCertificate":"MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=","RawSubjectPublicKeyInfo":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==","RawSubject":"MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=","RawIssuer":"MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t","Signature":"MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","SignatureAlgorithm":10,"PublicKeyAlgorithm":3,"PublicKey":{"Curve":{"P":115792089210356248762697446949407573530086143415290314195533631308867097853951,"N":115792089210356248762697446949407573529996955224135760342422259061068512044369,"B":41058363725152142129326129780047268409114441015993725554835256314039467401291,"Gx":48439561293906451759052585252797914202762949526041747995844080717082404635286,"Gy":36134250956749795798585127919587881956611106672985015071877198253568414405109,"BitSize":256,"Name":"P-256"},"X":12713421817418932763413718645318291131658429549618161805148108180370161081747,"Y":34338776428353405405758244684264567987888272761951209233206748157655345868530},"Version":3,"SerialNumber":24384531367087201972415224946499269301170097996,"Issuer":{"Country":["US"],"Organization":["Internet Widgets, Inc."],"OrganizationalUnit":["WWW"],"Locality":["San Francisco"],"Province":["California"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"example.com","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"California"},{"Type":[2,5,4,7],"Value":"San Francisco"},{"Type":[2,5,4,10],"Value":"Internet Widgets, Inc."},{"Type":[2,5,4,11],"Value":"WWW"},{"Type":[2,5,4,3],"Value":"example.com"}],"ExtraNames":null},"Subject":{"Country":["US"],"Organization":["Hyperledger Fabric"],"OrganizationalUnit":["COP"],"Locality":["Raleigh"],"Province":["North Carolina"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"North Carolina"},{"Type":[2,5,4,7],"Value":"Raleigh"},{"Type":[2,5,4,10],"Value":"Hyperledger Fabric"},{"Type":[2,5,4,11],"Value":"COP"}],"ExtraNames":null},"NotBefore":"2016-11-11T17:07:00Z","NotAfter":"2017-11-11T17:07:00Z","KeyUsage":5,"Extensions":[{"Id":[2,5,29,15],"Critical":true,"Value":"AwIFoA=="},{"Id":[2,5,29,37],"Critical":false,"Value":"MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="},{"Id":[2,5,29,19],"Critical":true,"Value":"MAA="},{"Id":[2,5,29,14],"Critical":false,"Value":"BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="},{"Id":[2,5,29,35],"Critical":false,"Value":"MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"},{"Id":[2,5,29,17],"Critical":false,"Value":"MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"}],"ExtraExtensions":null,"UnhandledCriticalExtensions":null,"ExtKeyUsage":[1,2],"UnknownExtKeyUsage":null,"BasicConstraintsValid":true,"IsCA":false,"MaxPathLen":-1,"MaxPathLenZero":false,"SubjectKeyId":"4UJ1xRnh6zeW2IKABUOjIt9Wk8g=","AuthorityKeyId":"F2dCPaqegj/ExR2fW8OZ0bWcSBA=","OCSPServer":null,"IssuingCertificateURL":null,"DNSNames":["myhost.com","www.myhost.com"],"EmailAddresses":null,"IPAddresses":null,"PermittedDNSDomainsCritical":false,"PermittedDNSDomains":null,"CRLDistributionPoints":null,"PolicyIdentifiers":null},"nonce":"623+OK3zq8W+0IHjxnQaTq/OSNHI5rpF"},"signature":"MEUCIQChWt1CMgYq9y3b1ZKeYqVt/wFeUqebGdbxCsLFi75q9QIgTbtMD6PtVXkoIUtuyzPNFrYZwFQNwZXnBFWOUc9x3TY="},"last_config_block_number":{"signature_data":{"signature_header":{"Certificate":{"Raw":"MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","RawTBSCertificate":"MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=","RawSubjectPublicKeyInfo":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==","RawSubject":"MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=","RawIssuer":"MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t","Signature":"MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=","SignatureAlgorithm":10,"PublicKeyAlgorithm":3,"PublicKey":{"Curve":{"P":115792089210356248762697446949407573530086143415290314195533631308867097853951,"N":115792089210356248762697446949407573529996955224135760342422259061068512044369,"B":41058363725152142129326129780047268409114441015993725554835256314039467401291,"Gx":48439561293906451759052585252797914202762949526041747995844080717082404635286,"Gy":36134250956749795798585127919587881956611106672985015071877198253568414405109,"BitSize":256,"Name":"P-256"},"X":12713421817418932763413718645318291131658429549618161805148108180370161081747,"Y":34338776428353405405758244684264567987888272761951209233206748157655345868530},"Version":3,"SerialNumber":24384531367087201972415224946499269301170097996,"Issuer":{"Country":["US"],"Organization":["Internet Widgets, Inc."],"OrganizationalUnit":["WWW"],"Locality":["San Francisco"],"Province":["California"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"example.com","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"California"},{"Type":[2,5,4,7],"Value":"San Francisco"},{"Type":[2,5,4,10],"Value":"Internet Widgets, Inc."},{"Type":[2,5,4,11],"Value":"WWW"},{"Type":[2,5,4,3],"Value":"example.com"}],"ExtraNames":null},"Subject":{"Country":["US"],"Organization":["Hyperledger Fabric"],"OrganizationalUnit":["COP"],"Locality":["Raleigh"],"Province":["North Carolina"],"StreetAddress":null,"PostalCode":null,"SerialNumber":"","CommonName":"","Names":[{"Type":[2,5,4,6],"Value":"US"},{"Type":[2,5,4,8],"Value":"North Carolina"},{"Type":[2,5,4,7],"Value":"Raleigh"},{"Type":[2,5,4,10],"Value":"Hyperledger Fabric"},{"Type":[2,5,4,11],"Value":"COP"}],"ExtraNames":null},"NotBefore":"2016-11-11T17:07:00Z","NotAfter":"2017-11-11T17:07:00Z","KeyUsage":5,"Extensions":[{"Id":[2,5,29,15],"Critical":true,"Value":"AwIFoA=="},{"Id":[2,5,29,37],"Critical":false,"Value":"MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="},{"Id":[2,5,29,19],"Critical":true,"Value":"MAA="},{"Id":[2,5,29,14],"Critical":false,"Value":"BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="},{"Id":[2,5,29,35],"Critical":false,"Value":"MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"},{"Id":[2,5,29,17],"Critical":false,"Value":"MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"}],"ExtraExtensions":null,"UnhandledCriticalExtensions":null,"ExtKeyUsage":[1,2],"UnknownExtKeyUsage":null,"BasicConstraintsValid":true,"IsCA":false,"MaxPathLen":-1,"MaxPathLenZero":false,"SubjectKeyId":"4UJ1xRnh6zeW2IKABUOjIt9Wk8g=","AuthorityKeyId":"F2dCPaqegj/ExR2fW8OZ0bWcSBA=","OCSPServer":null,"IssuingCertificateURL":null,"DNSNames":["myhost.com","www.myhost.com"],"EmailAddresses":null,"IPAddresses":null,"PermittedDNSDomainsCritical":false,"PermittedDNSDomains":null,"CRLDistributionPoints":null,"PolicyIdentifiers":null},"nonce":"jE+pw4uDSu5NqW+AqLGuf4C5KzUSfi93"},"signature":"MEUCIQCc9kzxzeGPiZmNsg5U7BxH6uYJQC9e9b2XVzDhxw1mcQIgDwvih/L7OxEjatWe2gmyKircMEBSzfcWNXMe3vmbS4w="}},"transaction_filter":"AA==","orderer_kafka_metadata":{}}
+{
+  "header": {
+    "number": 2,
+    "previous_hash": "P38HmhzGgtqlicZO4RAvwYn36ghPV/KPKkiq05G6x9o=",
+    "data_hash": "vAQaeXokNATiRfnckkrli+aa1QE2M7S06533QFcWTVg="
+  },
+  "transactions": [
+    {
+      "signature": "MEQCIG2qP7tQGJ68+lvXBFwrQYs+IhC2uoO1Dmop6g2kAjFaAiAnluZ48/fSb72SLL7vcHy2KtwSj2OWxjx2deEK7f+nzg==",
+      "channel_header": {
+        "type": 3,
+        "timestamp": {
+          "seconds": 1492523424,
+          "nanos": 473577464
+        },
+        "channel_id": "ch1",
+        "tx_id": "0225321716ce66179296a83ab82c6088f64154f3db0d3231f883694205ddd344",
+        "chaincode_id": {
+          "name": "mycc1",
+          "version": "0"
+        }
+      },
+      "signature_header": {
+        "Certificate": {
+          "Raw": "MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "RawTBSCertificate": "MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=",
+          "RawSubjectPublicKeyInfo": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==",
+          "RawSubject": "MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=",
+          "RawIssuer": "MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t",
+          "Signature": "MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "SignatureAlgorithm": 10,
+          "PublicKeyAlgorithm": 3,
+          "PublicKey": {
+            "Curve": {
+              "P": 115792089210356248762697446949407573530086143415290314195533631308867097853951,
+              "N": 115792089210356248762697446949407573529996955224135760342422259061068512044369,
+              "B": 41058363725152142129326129780047268409114441015993725554835256314039467401291,
+              "Gx": 48439561293906451759052585252797914202762949526041747995844080717082404635286,
+              "Gy": 36134250956749795798585127919587881956611106672985015071877198253568414405109,
+              "BitSize": 256,
+              "Name": "P-256"
+            },
+            "X": 12713421817418932763413718645318291131658429549618161805148108180370161081747,
+            "Y": 34338776428353405405758244684264567987888272761951209233206748157655345868530
+          },
+          "Version": 3,
+          "SerialNumber": 24384531367087201972415224946499269301170097996,
+          "Issuer": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Internet Widgets, Inc."
+            ],
+            "OrganizationalUnit": [
+              "WWW"
+            ],
+            "Locality": [
+              "San Francisco"
+            ],
+            "Province": [
+              "California"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "example.com",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "California"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "San Francisco"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Internet Widgets, Inc."
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "WWW"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  3
+                ],
+                "Value": "example.com"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "Subject": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Hyperledger Fabric"
+            ],
+            "OrganizationalUnit": [
+              "COP"
+            ],
+            "Locality": [
+              "Raleigh"
+            ],
+            "Province": [
+              "North Carolina"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "North Carolina"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "Raleigh"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Hyperledger Fabric"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "COP"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "NotBefore": "2016-11-11T17:07:00Z",
+          "NotAfter": "2017-11-11T17:07:00Z",
+          "KeyUsage": 5,
+          "Extensions": [
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                15
+              ],
+              "Critical": true,
+              "Value": "AwIFoA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                37
+              ],
+              "Critical": false,
+              "Value": "MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                19
+              ],
+              "Critical": true,
+              "Value": "MAA="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                14
+              ],
+              "Critical": false,
+              "Value": "BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                35
+              ],
+              "Critical": false,
+              "Value": "MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                17
+              ],
+              "Critical": false,
+              "Value": "MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"
+            }
+          ],
+          "ExtraExtensions": null,
+          "UnhandledCriticalExtensions": null,
+          "ExtKeyUsage": [
+            1,
+            2
+          ],
+          "UnknownExtKeyUsage": null,
+          "BasicConstraintsValid": true,
+          "IsCA": false,
+          "MaxPathLen": -1,
+          "MaxPathLenZero": false,
+          "SubjectKeyId": "4UJ1xRnh6zeW2IKABUOjIt9Wk8g=",
+          "AuthorityKeyId": "F2dCPaqegj/ExR2fW8OZ0bWcSBA=",
+          "OCSPServer": null,
+          "IssuingCertificateURL": null,
+          "DNSNames": [
+            "myhost.com",
+            "www.myhost.com"
+          ],
+          "EmailAddresses": null,
+          "IPAddresses": null,
+          "PermittedDNSDomainsCritical": false,
+          "PermittedDNSDomains": null,
+          "CRLDistributionPoints": null,
+          "PolicyIdentifiers": null
+        },
+        "nonce": "5bVV0MotH9ZKPP3fEejCAKP8BBlVHRzx"
+      },
+      "tx_action_signature_header": {
+        "Certificate": {
+          "Raw": "MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "RawTBSCertificate": "MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=",
+          "RawSubjectPublicKeyInfo": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==",
+          "RawSubject": "MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=",
+          "RawIssuer": "MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t",
+          "Signature": "MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "SignatureAlgorithm": 10,
+          "PublicKeyAlgorithm": 3,
+          "PublicKey": {
+            "Curve": {
+              "P": 115792089210356248762697446949407573530086143415290314195533631308867097853951,
+              "N": 115792089210356248762697446949407573529996955224135760342422259061068512044369,
+              "B": 41058363725152142129326129780047268409114441015993725554835256314039467401291,
+              "Gx": 48439561293906451759052585252797914202762949526041747995844080717082404635286,
+              "Gy": 36134250956749795798585127919587881956611106672985015071877198253568414405109,
+              "BitSize": 256,
+              "Name": "P-256"
+            },
+            "X": 12713421817418932763413718645318291131658429549618161805148108180370161081747,
+            "Y": 34338776428353405405758244684264567987888272761951209233206748157655345868530
+          },
+          "Version": 3,
+          "SerialNumber": 24384531367087201972415224946499269301170097996,
+          "Issuer": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Internet Widgets, Inc."
+            ],
+            "OrganizationalUnit": [
+              "WWW"
+            ],
+            "Locality": [
+              "San Francisco"
+            ],
+            "Province": [
+              "California"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "example.com",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "California"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "San Francisco"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Internet Widgets, Inc."
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "WWW"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  3
+                ],
+                "Value": "example.com"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "Subject": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Hyperledger Fabric"
+            ],
+            "OrganizationalUnit": [
+              "COP"
+            ],
+            "Locality": [
+              "Raleigh"
+            ],
+            "Province": [
+              "North Carolina"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "North Carolina"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "Raleigh"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Hyperledger Fabric"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "COP"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "NotBefore": "2016-11-11T17:07:00Z",
+          "NotAfter": "2017-11-11T17:07:00Z",
+          "KeyUsage": 5,
+          "Extensions": [
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                15
+              ],
+              "Critical": true,
+              "Value": "AwIFoA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                37
+              ],
+              "Critical": false,
+              "Value": "MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                19
+              ],
+              "Critical": true,
+              "Value": "MAA="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                14
+              ],
+              "Critical": false,
+              "Value": "BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                35
+              ],
+              "Critical": false,
+              "Value": "MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                17
+              ],
+              "Critical": false,
+              "Value": "MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"
+            }
+          ],
+          "ExtraExtensions": null,
+          "UnhandledCriticalExtensions": null,
+          "ExtKeyUsage": [
+            1,
+            2
+          ],
+          "UnknownExtKeyUsage": null,
+          "BasicConstraintsValid": true,
+          "IsCA": false,
+          "MaxPathLen": -1,
+          "MaxPathLenZero": false,
+          "SubjectKeyId": "4UJ1xRnh6zeW2IKABUOjIt9Wk8g=",
+          "AuthorityKeyId": "F2dCPaqegj/ExR2fW8OZ0bWcSBA=",
+          "OCSPServer": null,
+          "IssuingCertificateURL": null,
+          "DNSNames": [
+            "myhost.com",
+            "www.myhost.com"
+          ],
+          "EmailAddresses": null,
+          "IPAddresses": null,
+          "PermittedDNSDomainsCritical": false,
+          "PermittedDNSDomains": null,
+          "CRLDistributionPoints": null,
+          "PolicyIdentifiers": null
+        },
+        "nonce": "5bVV0MotH9ZKPP3fEejCAKP8BBlVHRzx"
+      },
+      "chaincode_spec": {
+        "type": 1,
+        "chaincode_id": {
+          "name": "mycc1",
+          "version": "0"
+        },
+        "input": {
+          "Args": [
+            "initMarble",
+            "marble1",
+            "blue",
+            "35",
+            "tom"
+          ]
+        }
+      },
+      "endorsements": [
+        {
+          "signature_header": {
+            "Certificate": null,
+            "nonce": "LS0tLS1CRUdJTiAtLS0tLQpNSUlDakRDQ0FqS2dBd0lCQWdJVUJFVndzU3gwVG1xZGJ6TndsZU5CQnpvSVQwd3dDZ1lJS29aSXpqMEVBd0l3CmZ6RUxNQWtHQTFVRUJoTUNWVk14RXpBUkJnTlZCQWdUQ2tOaGJHbG1iM0p1YVdFeEZqQVVCZ05WQkFjVERWTmgKYmlCR2NtRnVZMmx6WTI4eEh6QWRCZ05WQkFvVEZrbHVkR1Z5Ym1WMElGZHBaR2RsZEhNc0lFbHVZeTR4RERBSwpCZ05WQkFzVEExZFhWekVVTUJJR0ExVUVBeE1MWlhoaGJYQnNaUzVqYjIwd0hoY05NVFl4TVRFeE1UY3dOekF3CldoY05NVGN4TVRFeE1UY3dOekF3V2pCak1Rc3dDUVlEVlFRR0V3SlZVekVYTUJVR0ExVUVDQk1PVG05eWRHZ2cKUTJGeWIyeHBibUV4RURBT0JnTlZCQWNUQjFKaGJHVnBaMmd4R3pBWkJnTlZCQW9URWtoNWNHVnliR1ZrWjJWeQpJRVpoWW5KcFl6RU1NQW9HQTFVRUN4TURRMDlRTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFCkhCdUtzQU80M2hzNEpHcEZmaUdNa0IveHNJTFRzT3ZtTjJXbXdwc1BIWk5MNnc4SFdlM3hDUFF0ZEcvWEpKdloKK0M3NTZLRXNVQk0zeXc1UFRma3U4cU9CcHpDQnBEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZdwpGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGT0ZDCmRjVVo0ZXMzbHRpQ2dBVkRveUxmVnBQSU1COEdBMVVkSXdRWU1CYUFGQmRuUWoycW5vSS94TVVkbjF2RG1kRzEKbkVnUU1DVUdBMVVkRVFRZU1CeUNDbTE1YUc5emRDNWpiMjJDRG5kM2R5NXRlV2h2YzNRdVkyOXRNQW9HQ0NxRwpTTTQ5QkFNQ0EwZ0FNRVVDSURmOUhibDR4bjN6NEV3TkttaWxNOWxYMkZxNGpXcEFhUlZCOTdPbVZFZXlBaUVBCjI1YURQUUhHR3EyQXZoS1Qwd3Z0MDhjWDFHVEdDSWJmbXVMcE13S1FqMzg9Ci0tLS0tRU5EIC0tLS0tCg=="
+          },
+          "signature": "MEQCIDqBE7uW/MS0ZP+lzOD4K5vMZFIMxKZvWqC7TbumncItAiBnr9oo3ZXokJpj7NXQHp27YNFDxys4kKBrGGA7TEAPSg=="
+        }
+      ],
+      "proposal_hash": "5ETLlpAwr+9kZH7EdV5KYsQncx0FLKCi7k9btyy4m2I=",
+      "events": {},
+      "response": {
+        "status": 200
+      },
+      "ns_read_write_Set": [
+        {
+          "Namespace": "lccc",
+          "KVRWSet": {
+            "reads": [
+              {
+                "key": "mycc1",
+                "version": {
+                  "block_num": 1,
+                  "tx_num": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Namespace": "mycc1",
+          "KVRWSet": {
+            "reads": [
+              {
+                "key": "marble1"
+              }
+            ],
+            "writes": [
+              {
+                "key": "\u0000color~name\u0000blue\u0000marble1\u0000",
+                "value": "AA=="
+              },
+              {
+                "key": "marble1",
+                "value": "eyJkb2NUeXBlIjoibWFyYmxlIiwibmFtZSI6Im1hcmJsZTEiLCJjb2xvciI6ImJsdWUiLCJzaXplIjozNSwib3duZXIiOiJ0b20ifQ=="
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "block_creator_signature": {
+    "signature_header": {
+      "Certificate": {
+        "Raw": "MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+        "RawTBSCertificate": "MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=",
+        "RawSubjectPublicKeyInfo": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==",
+        "RawSubject": "MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=",
+        "RawIssuer": "MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t",
+        "Signature": "MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+        "SignatureAlgorithm": 10,
+        "PublicKeyAlgorithm": 3,
+        "PublicKey": {
+          "Curve": {
+            "P": 115792089210356248762697446949407573530086143415290314195533631308867097853951,
+            "N": 115792089210356248762697446949407573529996955224135760342422259061068512044369,
+            "B": 41058363725152142129326129780047268409114441015993725554835256314039467401291,
+            "Gx": 48439561293906451759052585252797914202762949526041747995844080717082404635286,
+            "Gy": 36134250956749795798585127919587881956611106672985015071877198253568414405109,
+            "BitSize": 256,
+            "Name": "P-256"
+          },
+          "X": 12713421817418932763413718645318291131658429549618161805148108180370161081747,
+          "Y": 34338776428353405405758244684264567987888272761951209233206748157655345868530
+        },
+        "Version": 3,
+        "SerialNumber": 24384531367087201972415224946499269301170097996,
+        "Issuer": {
+          "Country": [
+            "US"
+          ],
+          "Organization": [
+            "Internet Widgets, Inc."
+          ],
+          "OrganizationalUnit": [
+            "WWW"
+          ],
+          "Locality": [
+            "San Francisco"
+          ],
+          "Province": [
+            "California"
+          ],
+          "StreetAddress": null,
+          "PostalCode": null,
+          "SerialNumber": "",
+          "CommonName": "example.com",
+          "Names": [
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                6
+              ],
+              "Value": "US"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                8
+              ],
+              "Value": "California"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                7
+              ],
+              "Value": "San Francisco"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                10
+              ],
+              "Value": "Internet Widgets, Inc."
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                11
+              ],
+              "Value": "WWW"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                3
+              ],
+              "Value": "example.com"
+            }
+          ],
+          "ExtraNames": null
+        },
+        "Subject": {
+          "Country": [
+            "US"
+          ],
+          "Organization": [
+            "Hyperledger Fabric"
+          ],
+          "OrganizationalUnit": [
+            "COP"
+          ],
+          "Locality": [
+            "Raleigh"
+          ],
+          "Province": [
+            "North Carolina"
+          ],
+          "StreetAddress": null,
+          "PostalCode": null,
+          "SerialNumber": "",
+          "CommonName": "",
+          "Names": [
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                6
+              ],
+              "Value": "US"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                8
+              ],
+              "Value": "North Carolina"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                7
+              ],
+              "Value": "Raleigh"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                10
+              ],
+              "Value": "Hyperledger Fabric"
+            },
+            {
+              "Type": [
+                2,
+                5,
+                4,
+                11
+              ],
+              "Value": "COP"
+            }
+          ],
+          "ExtraNames": null
+        },
+        "NotBefore": "2016-11-11T17:07:00Z",
+        "NotAfter": "2017-11-11T17:07:00Z",
+        "KeyUsage": 5,
+        "Extensions": [
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              15
+            ],
+            "Critical": true,
+            "Value": "AwIFoA=="
+          },
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              37
+            ],
+            "Critical": false,
+            "Value": "MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="
+          },
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              19
+            ],
+            "Critical": true,
+            "Value": "MAA="
+          },
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              14
+            ],
+            "Critical": false,
+            "Value": "BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="
+          },
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              35
+            ],
+            "Critical": false,
+            "Value": "MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"
+          },
+          {
+            "Id": [
+              2,
+              5,
+              29,
+              17
+            ],
+            "Critical": false,
+            "Value": "MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"
+          }
+        ],
+        "ExtraExtensions": null,
+        "UnhandledCriticalExtensions": null,
+        "ExtKeyUsage": [
+          1,
+          2
+        ],
+        "UnknownExtKeyUsage": null,
+        "BasicConstraintsValid": true,
+        "IsCA": false,
+        "MaxPathLen": -1,
+        "MaxPathLenZero": false,
+        "SubjectKeyId": "4UJ1xRnh6zeW2IKABUOjIt9Wk8g=",
+        "AuthorityKeyId": "F2dCPaqegj/ExR2fW8OZ0bWcSBA=",
+        "OCSPServer": null,
+        "IssuingCertificateURL": null,
+        "DNSNames": [
+          "myhost.com",
+          "www.myhost.com"
+        ],
+        "EmailAddresses": null,
+        "IPAddresses": null,
+        "PermittedDNSDomainsCritical": false,
+        "PermittedDNSDomains": null,
+        "CRLDistributionPoints": null,
+        "PolicyIdentifiers": null
+      },
+      "nonce": "YPwhXsEjlwurZY+rR6HWDkFeRVrxCFyc"
+    },
+    "signature": "MEUCIQD+jRiZyALB5XP3m0boif5MSw/p/K2mgchYmTMpPcRt2AIgHNGUXnnYk6Uursf7t0Q9DC3znk4nq1JSrTCofu5f5A8="
+  },
+  "last_config_block_number": {
+    "signature_data": {
+      "signature_header": {
+        "Certificate": {
+          "Raw": "MIICjDCCAjKgAwIBAgIUBEVwsSx0TmqdbzNwleNBBzoIT0wwCgYIKoZIzj0EAwIwfzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHzAdBgNVBAoTFkludGVybmV0IFdpZGdldHMsIEluYy4xDDAKBgNVBAsTA1dXVzEUMBIGA1UEAxMLZXhhbXBsZS5jb20wHhcNMTYxMTExMTcwNzAwWhcNMTcxMTExMTcwNzAwWjBjMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xpbmExEDAOBgNVBAcTB1JhbGVpZ2gxGzAZBgNVBAoTEkh5cGVybGVkZ2VyIEZhYnJpYzEMMAoGA1UECxMDQ09QMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8qOBpzCBpDAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFOFCdcUZ4es3ltiCgAVDoyLfVpPIMB8GA1UdIwQYMBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQMCUGA1UdEQQeMByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29tMAoGCCqGSM49BAMCA0gAMEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "RawTBSCertificate": "MIICMqADAgECAhQERXCxLHROap1vM3CV40EHOghPTDAKBggqhkjOPQQDAjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEfMB0GA1UEChMWSW50ZXJuZXQgV2lkZ2V0cywgSW5jLjEMMAoGA1UECxMDV1dXMRQwEgYDVQQDEwtleGFtcGxlLmNvbTAeFw0xNjExMTExNzA3MDBaFw0xNzExMTExNzA3MDBaMGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1AwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQcG4qwA7jeGzgkakV+IYyQH/GwgtOw6+Y3ZabCmw8dk0vrDwdZ7fEI9C10b9ckm9n4LvnooSxQEzfLDk9N+S7yo4GnMIGkMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQU4UJ1xRnh6zeW2IKABUOjIt9Wk8gwHwYDVR0jBBgwFoAUF2dCPaqegj/ExR2fW8OZ0bWcSBAwJQYDVR0RBB4wHIIKbXlob3N0LmNvbYIOd3d3Lm15aG9zdC5jb20=",
+          "RawSubjectPublicKeyInfo": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEHBuKsAO43hs4JGpFfiGMkB/xsILTsOvmN2WmwpsPHZNL6w8HWe3xCPQtdG/XJJvZ+C756KEsUBM3yw5PTfku8g==",
+          "RawSubject": "MGMxCzAJBgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEQMA4GA1UEBxMHUmFsZWlnaDEbMBkGA1UEChMSSHlwZXJsZWRnZXIgRmFicmljMQwwCgYDVQQLEwNDT1A=",
+          "RawIssuer": "MH8xCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQKExZJbnRlcm5ldCBXaWRnZXRzLCBJbmMuMQwwCgYDVQQLEwNXV1cxFDASBgNVBAMTC2V4YW1wbGUuY29t",
+          "Signature": "MEUCIDf9Hbl4xn3z4EwNKmilM9lX2Fq4jWpAaRVB97OmVEeyAiEA25aDPQHGGq2AvhKT0wvt08cX1GTGCIbfmuLpMwKQj38=",
+          "SignatureAlgorithm": 10,
+          "PublicKeyAlgorithm": 3,
+          "PublicKey": {
+            "Curve": {
+              "P": 115792089210356248762697446949407573530086143415290314195533631308867097853951,
+              "N": 115792089210356248762697446949407573529996955224135760342422259061068512044369,
+              "B": 41058363725152142129326129780047268409114441015993725554835256314039467401291,
+              "Gx": 48439561293906451759052585252797914202762949526041747995844080717082404635286,
+              "Gy": 36134250956749795798585127919587881956611106672985015071877198253568414405109,
+              "BitSize": 256,
+              "Name": "P-256"
+            },
+            "X": 12713421817418932763413718645318291131658429549618161805148108180370161081747,
+            "Y": 34338776428353405405758244684264567987888272761951209233206748157655345868530
+          },
+          "Version": 3,
+          "SerialNumber": 24384531367087201972415224946499269301170097996,
+          "Issuer": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Internet Widgets, Inc."
+            ],
+            "OrganizationalUnit": [
+              "WWW"
+            ],
+            "Locality": [
+              "San Francisco"
+            ],
+            "Province": [
+              "California"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "example.com",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "California"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "San Francisco"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Internet Widgets, Inc."
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "WWW"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  3
+                ],
+                "Value": "example.com"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "Subject": {
+            "Country": [
+              "US"
+            ],
+            "Organization": [
+              "Hyperledger Fabric"
+            ],
+            "OrganizationalUnit": [
+              "COP"
+            ],
+            "Locality": [
+              "Raleigh"
+            ],
+            "Province": [
+              "North Carolina"
+            ],
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "",
+            "Names": [
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  6
+                ],
+                "Value": "US"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  8
+                ],
+                "Value": "North Carolina"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  7
+                ],
+                "Value": "Raleigh"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                "Value": "Hyperledger Fabric"
+              },
+              {
+                "Type": [
+                  2,
+                  5,
+                  4,
+                  11
+                ],
+                "Value": "COP"
+              }
+            ],
+            "ExtraNames": null
+          },
+          "NotBefore": "2016-11-11T17:07:00Z",
+          "NotAfter": "2017-11-11T17:07:00Z",
+          "KeyUsage": 5,
+          "Extensions": [
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                15
+              ],
+              "Critical": true,
+              "Value": "AwIFoA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                37
+              ],
+              "Critical": false,
+              "Value": "MBQGCCsGAQUFBwMBBggrBgEFBQcDAg=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                19
+              ],
+              "Critical": true,
+              "Value": "MAA="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                14
+              ],
+              "Critical": false,
+              "Value": "BBThQnXFGeHrN5bYgoAFQ6Mi31aTyA=="
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                35
+              ],
+              "Critical": false,
+              "Value": "MBaAFBdnQj2qnoI/xMUdn1vDmdG1nEgQ"
+            },
+            {
+              "Id": [
+                2,
+                5,
+                29,
+                17
+              ],
+              "Critical": false,
+              "Value": "MByCCm15aG9zdC5jb22CDnd3dy5teWhvc3QuY29t"
+            }
+          ],
+          "ExtraExtensions": null,
+          "UnhandledCriticalExtensions": null,
+          "ExtKeyUsage": [
+            1,
+            2
+          ],
+          "UnknownExtKeyUsage": null,
+          "BasicConstraintsValid": true,
+          "IsCA": false,
+          "MaxPathLen": -1,
+          "MaxPathLenZero": false,
+          "SubjectKeyId": "4UJ1xRnh6zeW2IKABUOjIt9Wk8g=",
+          "AuthorityKeyId": "F2dCPaqegj/ExR2fW8OZ0bWcSBA=",
+          "OCSPServer": null,
+          "IssuingCertificateURL": null,
+          "DNSNames": [
+            "myhost.com",
+            "www.myhost.com"
+          ],
+          "EmailAddresses": null,
+          "IPAddresses": null,
+          "PermittedDNSDomainsCritical": false,
+          "PermittedDNSDomains": null,
+          "CRLDistributionPoints": null,
+          "PolicyIdentifiers": null
+        },
+        "nonce": "jgx/oUGD4WSNcnMBgB8p/yLO+hza1lch"
+      },
+      "signature": "MEUCIQChReDtAoKBFQxQAx9ir5IOQ1NyVB3LkvELnHNqKfXqHwIgF9R6c6ZPiz7fMRYA1llvN2WaI7UFc8hKhiinjcoF9NU="
+    }
+  },
+  "transaction_filter": "AA==",
+  "orderer_kafka_metadata": {}
+}
