@@ -4,7 +4,7 @@ To compile the fetch-block tool, run the following command
 
 ```$ go build```
 
-In order to compile this tool successfully, make sure that fabric/ is placed in ```$ $GOPATH/src/github.com/hyperledger/```
+If compilation fails, make sure that fabric/ is placed in ```$ $GOPATH/src/github.com/hyperledger/```
 
 After successful compilation, we can run the tool using $ ./fetch-block (by default, it listens on 0.0.0.0:7053). 
 
