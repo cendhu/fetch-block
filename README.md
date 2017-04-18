@@ -4,10 +4,12 @@ To compile the fetch-block tool, run the following command
 
 ```$ go build```
 
-Then, we can run the problem using $ ./fetch-block (by default, it listens on 0.0.0.0:7053). 
+In order to compile this tool successfully, make sure that fabric/ is placed in ```$ $GOPATH/src/github.com/hyperledger/```
+
+After successful compilation, we can run the tool using $ ./fetch-block (by default, it listens on 0.0.0.0:7053). 
 
 You can also give custom fabric event port using $ ./fetch-block -address 192.168.100.1:1053
 
-When you start executing transaction on blockchain, the block is printed in a JSON format.
+When you start executing transaction on blockchain, the blocks are printed in a JSON format.
 
 Refer to blockchain-fabric.blogspot.com for block structure.
