@@ -8,6 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/golang/protobuf/proto"
 	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
@@ -188,7 +189,6 @@ func main() {
 	for {
 		select {
 		case blockEvent := <-adapter.block_channel:
-			fmt.Printf("Received Block `%T", blockEvent)
 			var block *cb.Block
 			var localBlock Block
 			block = blockEvent.Block
@@ -223,6 +223,8 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.SignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
+				//localTransaction.SignatureHeader.Nonce = localSignatureHeader.Nonce
+				//localTransaction.SignatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
 				transaction := &pb.Transaction{}
 				if err := proto.Unmarshal(payload.Data, transaction); err != nil {
 					fmt.Printf("Error unmarshaling transaction: %s\n", err)
@@ -236,6 +238,10 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.TxActionSignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
+				//signatureHeader = &SignatureHeader{}
+				//signatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
+				//signatureHeader.Nonce = localSignatureHeader.Nonce
+				//localTransaction.TxActionSignatureHeader = signatureHeader
 
 				chaincodeProposalPayload := &pb.ChaincodeProposalPayload{}
 				if err := proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload); err != nil {
@@ -294,7 +300,10 @@ func main() {
 			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
 			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
 			blockJSON, _ := json.Marshal(localBlock)
-			fmt.Printf("Block: %s", blockJSON)
+			fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
+			fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
+			f, _ := os.Create("./" + fileName)
+			_, _ = f.WriteString(string(blockJSON))
 		}
 	}
 }
