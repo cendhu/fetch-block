@@ -12,4 +12,4 @@ You can also give custom fabric event port using $ ./fetch-block -address 192.16
 
 When you start executing transaction on blockchain, the blocks are printed in a JSON format.
 
-Refer to blockchain-fabric.blogspot.com for block structure.
+Refer to https://blockchain-fabric.blogspot.in/ for block structure.
