@@ -1,4 +1,6 @@
-Keep the src directory on any place in fabric/ and compile using $ go build 
+Keep the src directory on any place in fabric/ and compile using 
+
+```$ go build```
 
 Then, we can run the problem using $ ./fetch-block (by default, it listens on 0.0.0.0:7053). 
 
