@@ -1,5 +1,7 @@
 To compile the fetch-block tool, run the following command
+
 ```$ cd fabric/fetch-block```
+
 ```$ go build```
 
 Then, we can run the problem using $ ./fetch-block (by default, it listens on 0.0.0.0:7053). 
