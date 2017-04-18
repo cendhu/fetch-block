@@ -223,8 +223,6 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.SignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//localTransaction.SignatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.SignatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
 				transaction := &pb.Transaction{}
 				if err := proto.Unmarshal(payload.Data, transaction); err != nil {
 					fmt.Printf("Error unmarshaling transaction: %s\n", err)
@@ -238,10 +236,6 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.TxActionSignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//signatureHeader = &SignatureHeader{}
-				//signatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
-				//signatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.TxActionSignatureHeader = signatureHeader
 
 				chaincodeProposalPayload := &pb.ChaincodeProposalPayload{}
 				if err := proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload); err != nil {
