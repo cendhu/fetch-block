@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/x509"
 	"encoding/binary"
 	"encoding/json"
@@ -57,6 +58,12 @@ func startEventClient(peerEventAddress string) *eventAdapter {
 		return nil
 	}
 	return adapter
+}
+
+func prettyprint(b []byte) ([]byte, error) {
+	var out bytes.Buffer
+	err := json.Indent(&out, b, "", "  ")
+	return out.Bytes(), err
 }
 
 func deserializeIdentity(serializedID []byte) (*x509.Certificate, error) {
@@ -300,10 +307,11 @@ func main() {
 			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
 			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
 			blockJSON, _ := json.Marshal(localBlock)
+			blockJSONString, _ := prettyprint(blockJSON)
 			fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
 			fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
 			f, _ := os.Create("./" + fileName)
-			_, _ = f.WriteString(string(blockJSON))
+			_, _ = f.WriteString(string(blockJSONString))
 		}
 	}
 }
