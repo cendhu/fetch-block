@@ -13,11 +13,11 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/events/consumer"
+	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	cb "github.com/hyperledger/fabric/protos/common"
 	"github.com/hyperledger/fabric/protos/ledger/rwset"
 	"github.com/hyperledger/fabric/protos/ledger/rwset/kvrwset"
-	msp "github.com/hyperledger/fabric/protos/msp"
+	pbmsp "github.com/hyperledger/fabric/protos/msp"
 	ab "github.com/hyperledger/fabric/protos/orderer"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	utils "github.com/hyperledger/fabric/protos/utils"
@@ -48,10 +48,10 @@ func (adapter *eventAdapter) Disconnected(err error) {
 }
 
 func startEventClient(peerEventAddress string) *eventAdapter {
-	var eventClient *consumer.EventsClient
+	var eventClient *EventsClient
 	var err error
 	adapter := &eventAdapter{block_channel: make(chan *pb.Event_Block)}
-	eventClient, _ = consumer.NewEventsClient(peerEventAddress, 10, adapter)
+	eventClient, _ = NewEventsClient(peerEventAddress, 10, adapter)
 	if err = eventClient.Start(); err != nil {
 		fmt.Printf("could not start chat %s\n", err)
 		eventClient.Stop()
@@ -67,7 +67,7 @@ func prettyprint(b []byte) ([]byte, error) {
 }
 
 func deserializeIdentity(serializedID []byte) (*x509.Certificate, error) {
-	sId := &msp.SerializedIdentity{}
+	sId := &pbmsp.SerializedIdentity{}
 	err := proto.Unmarshal(serializedID, sId)
 	if err != nil {
 		return nil, fmt.Errorf("Could not deserialize a SerializedIdentity, err %s", err)
@@ -175,12 +175,23 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 
 }
 
+//var localMsp msp.MSP
+
 func main() {
 	var peerEventAddress string
+	var mspDir string
 	flag.StringVar(&peerEventAddress, "address", "0.0.0.0:7053", "address of events server")
+	flag.StringVar(&mspDir, "mspDir", "./msp", "local MSP directory which contains key and certificate")
 	flag.Parse()
 
 	fmt.Printf("Peer Event Address: %s\n", peerEventAddress)
+	fmt.Printf("Local MSP Directory: %s\n", mspDir)
+
+	err := mspmgmt.LoadLocalMsp(mspDir, nil, "DEFAULT")
+	if err != nil {
+		fmt.Printf("Fatal error when setting up MSP from directory: err %s\n", err)
+	}
+
 	event := &pb.Interest{EventType: pb.EventType_BLOCK}
 	//for receiving blocks from specific channel, we can
 	//pass channel id to pb.Interest as shown below:
