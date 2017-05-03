@@ -180,14 +180,17 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 func main() {
 	var peerEventAddress string
 	var mspDir string
+	var mspID string
 	flag.StringVar(&peerEventAddress, "address", "0.0.0.0:7053", "address of events server")
 	flag.StringVar(&mspDir, "mspDir", "./msp", "local MSP directory which contains key and certificate")
+	flag.StringVar(&mspID, "mspID", "DEFAULT", "local MSP directory which contains key and certificate")
 	flag.Parse()
 
 	fmt.Printf("Peer Event Address: %s\n", peerEventAddress)
 	fmt.Printf("Local MSP Directory: %s\n", mspDir)
+	fmt.Printf("Local MSP ID: %s\n", mspID)
 
-	err := mspmgmt.LoadLocalMsp(mspDir, nil, "DEFAULT")
+	err := mspmgmt.LoadLocalMsp(mspDir, nil, mspID)
 	if err != nil {
 		fmt.Printf("Fatal error when setting up MSP from directory: err %s\n", err)
 	}
@@ -198,6 +201,7 @@ func main() {
 	//event := &pb.Interest{EventType: EventType_BLOCK, ChainID: givenChannelID}
 	//However, we are interested in receiving all blocks.
 	interestedEvents = append(interestedEvents, event)
+	fmt.Printf("Starting Client\n")
 	adapter := startEventClient(peerEventAddress)
 	if adapter == nil {
 		fmt.Println("Error starting EventClient")
