@@ -27,13 +27,16 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/comm"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"github.com/hyperledger/fabric/protos/utils"
+	"github.com/spf13/viper"
+	"google.golang.org/grpc/credentials"
 )
 
 var consumerLogger = flogging.MustGetLogger("eventhub_consumer")
+
+const defaultTimeout = time.Second * 10
 
 //EventsClient holds the stream and adapter for consumer to work with
 type EventsClient struct {
@@ -65,10 +68,11 @@ func NewEventsClient(peerAddress string, regTimeout time.Duration, adapter Event
 
 //newEventsClientConnectionWithAddress Returns a new grpc.ClientConn to the configured local PEER.
 func newEventsClientConnectionWithAddress(peerAddress string) (*grpc.ClientConn, error) {
-	if comm.TLSEnabled() {
-		return comm.NewClientConnectionWithAddress(peerAddress, true, true, comm.InitTLSForPeer())
+	if viper.GetBool("tls.enabled") {
+		fmt.Printf("TLS is enabled\n")
+		return NewClientConnectionWithAddress(peerAddress, true, true, InitTLSForFetchBlock())
 	}
-	return comm.NewClientConnectionWithAddress(peerAddress, true, false, nil)
+	return NewClientConnectionWithAddress(peerAddress, true, false, nil)
 }
 
 func (ec *EventsClient) send(emsg *pb.Event) error {
@@ -233,7 +237,6 @@ func (ec *EventsClient) Start() error {
 	if err != nil {
 		return fmt.Errorf("could not create client conn to %s:%s", ec.peerAddress, err)
 	}
-
 	ies, err := ec.adapter.GetInterestedEvents()
 	if err != nil {
 		return fmt.Errorf("error getting interested events:%s", err)
@@ -265,4 +268,41 @@ func (ec *EventsClient) Stop() error {
 		return nil
 	}
 	return ec.stream.CloseSend()
+}
+
+func NewClientConnectionWithAddress(peerAddress string, block bool, tslEnabled bool, creds credentials.TransportCredentials) (*grpc.ClientConn, error) {
+	var opts []grpc.DialOption
+	if tslEnabled {
+		opts = append(opts, grpc.WithTransportCredentials(creds))
+	} else {
+		opts = append(opts, grpc.WithInsecure())
+	}
+	opts = append(opts, grpc.WithTimeout(defaultTimeout))
+	if block {
+		opts = append(opts, grpc.WithBlock())
+	}
+	conn, err := grpc.Dial(peerAddress, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return conn, err
+}
+
+// InitTLSForPeer returns TLS credentials for peer
+func InitTLSForFetchBlock() credentials.TransportCredentials {
+	var sn string
+	if viper.GetString("tls.serverhostoverride") != "" {
+		sn = viper.GetString("tls.serverhostoverride")
+	}
+	var creds credentials.TransportCredentials
+	if viper.GetString("tls.rootcert.file") != "" {
+		var err error
+		creds, err = credentials.NewClientTLSFromFile(viper.GetString("tls.rootcert.file"), sn)
+		if err != nil {
+			fmt.Printf("Failed to create TLS credentials %v", err)
+		}
+	} else {
+		creds = credentials.NewClientTLSFromCert(nil, sn)
+	}
+	return creds
 }

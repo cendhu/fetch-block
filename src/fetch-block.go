@@ -6,7 +6,6 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"encoding/pem"
-	"flag"
 	"fmt"
 	"os"
 	"strconv"
@@ -21,6 +20,7 @@ import (
 	ab "github.com/hyperledger/fabric/protos/orderer"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	utils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/spf13/viper"
 )
 
 var interestedEvents []*pb.Interest
@@ -178,13 +178,24 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 //var localMsp msp.MSP
 
 func main() {
-	var peerEventAddress string
-	var mspDir string
-	var mspID string
-	flag.StringVar(&peerEventAddress, "address", "0.0.0.0:7053", "address of events server")
-	flag.StringVar(&mspDir, "mspDir", "./msp", "local MSP directory which contains key and certificate")
-	flag.StringVar(&mspID, "mspID", "DEFAULT", "local MSP directory which contains key and certificate")
-	flag.Parse()
+	viper.SetConfigType("yaml")
+	viper.SetConfigName("config")
+	viper.AddConfigPath(".")
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Printf("Fatol error when read config file: err %s\n", err)
+	}
+	peerEventAddress := viper.GetString("peer.event-address")
+	if peerEventAddress == "" {
+		fmt.Printf("Event address of the peer should not be empty\n")
+	}
+	mspDir := viper.GetString("msp.path")
+	if mspDir == "" {
+		fmt.Printf("MSP config path should not be empty\n")
+	}
+	mspID := viper.GetString("msp.localMspId")
+	if mspID == "" {
+		fmt.Printf("MSP ID should not be empty\n")
+	}
 
 	fmt.Printf("Peer Event Address: %s\n", peerEventAddress)
 	fmt.Printf("Local MSP Directory: %s\n", mspDir)
@@ -207,8 +218,8 @@ func main() {
 		fmt.Println("Error starting EventClient")
 		return
 	}
-
 	for {
+		fmt.Println("Listening for the event...\n")
 		select {
 		case blockEvent := <-adapter.block_channel:
 			var block *cb.Block
