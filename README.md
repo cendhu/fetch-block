@@ -1,4 +1,4 @@
-Clone the fetch-block repo to ```$ $GOPATH/src/github.com/hyperledger/fabrici/``` using ```git clone https://github.com/cendhu/fetch-block``
+Clone the fetch-block repo to ```$ $GOPATH/src/github.com/hyperledger/fabric/``` using ```git clone https://github.com/cendhu/fetch-block```
 
 To compile the fetch-block tool, run the following command
 
