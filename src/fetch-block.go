@@ -339,7 +339,19 @@ func main() {
 						if err := proto.Unmarshal(nsRwset.Rwset, kvRWSet); err != nil {
 							fmt.Printf("Error unmarshaling tx read write set: %s\n", err)
 						}
-						nsReadWriteSet.KVRWSet = kvRWSet
+						localkvRWSet := &KVRWSet{}
+						localkvRWSet.Reads = kvRWSet.Reads
+
+						var writes []*KVWrite
+						for _, write := range kvRWSet.Writes {
+							localWrite := &KVWrite{}
+							localWrite.Key = write.Key
+							localWrite.IsDelete = write.IsDelete
+							localWrite.Value = string(write.Value)
+							writes = append(writes, localWrite)
+						}
+						localkvRWSet.Writes = writes
+						nsReadWriteSet.KVRWSet = localkvRWSet
 						localTransaction.NsRwset = append(localTransaction.NsRwset, nsReadWriteSet)
 					}
 				}

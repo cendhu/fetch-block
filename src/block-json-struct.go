@@ -14,7 +14,7 @@ type Block struct {
 	Transactions          []*Transaction      `json:"transactions,omitempty"`
 	BlockCreatorSignature *SignatureMetadata  `json:"block_creator_signature,omitempty"`
 	LastConfigBlockNumber *LastConfigMetadata `json:"last_config_block_number,omitempty"`
-	TransactionFilter     []uint8             `json:"transaction_filter,omitempty"`
+	TransactionFilter     []string            `json:"transaction_filter,omitempty"`
 	OrdererKafkaMetadata  *OrdererMetadata    `json:"orderer_kafka_metadata,omitempty"`
 }
 
@@ -44,9 +44,8 @@ type Transaction struct {
 	Events                  *pb.ChaincodeEvent `json:"events,omitempty"`
 	Response                *pb.Response       `json:"response,omitempty"`
 	NsRwset                 []*NsReadWriteSet  `json:"ns_read_write_Set,omitempty"`
-	// Capture transaction validation code
-	ValidationCode     uint8  `json:"validation_code"`
-	ValidationCodeName string `json:"validation_code_name,omitempty"`
+	ValidationCode          uint8              `json:"validation_code"`
+	ValidationCodeName      string             `json:"validation_code_name,omitempty"`
 }
 
 type ChannelHeader struct {
@@ -84,6 +83,17 @@ type SignatureHeader struct {
 }
 
 type NsReadWriteSet struct {
-	Namespace string           `json: "namespace,omitempty"`
-	KVRWSet   *kvrwset.KVRWSet `json: "kVRWSet,omitempty"`
+	Namespace string   `json: "namespace,omitempty"`
+	KVRWSet   *KVRWSet `json: "kVRWSet,omitempty"`
+}
+
+type KVRWSet struct {
+	Reads  []*kvrwset.KVRead `json:"reads,omitempty"`
+	Writes []*KVWrite        `json:"writes,omitempty"`
+}
+
+type KVWrite struct {
+	Key      string `json:"key,omitempty"`
+	IsDelete bool   `json:"is_delete,omitempty"`
+	Value    string `json:"value,omitempty"`
 }
