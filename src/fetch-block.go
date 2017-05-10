@@ -175,6 +175,16 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 
 }
 
+// This method add transaction validation information from block TransactionFilter struct
+func addTransactionValidation(block *Block, tran *Transaction, txIdx int) error {
+	if len(block.TransactionFilter) > txIdx {
+		tran.ValidationCode = block.TransactionFilter[txIdx]
+		tran.ValidationCodeName = pb.TxValidationCode_name[int32(tran.ValidationCode)]
+		return nil
+	}
+	return fmt.Errorf("Invalid index or transaction filler. Index: %d", txIdx)
+}
+
 //var localMsp msp.MSP
 
 func main() {
@@ -227,7 +237,23 @@ func main() {
 			block = blockEvent.Block
 			localBlock.Header = block.Header
 			localBlock.TransactionFilter = ledgerUtil.NewTxValidationFlags(len(block.Data.Data))
-			for _, data := range block.Data.Data {
+
+			// process block metadata before data
+			localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
+			lastConfigBlockNumber := &LastConfigMetadata{}
+			lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
+			lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
+			localBlock.LastConfigBlockNumber = lastConfigBlockNumber
+			txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
+			for index, b := range txBytes {
+				localBlock.TransactionFilter[index] = uint8(b)
+			}
+			ordererKafkaMetadata := &OrdererMetadata{}
+			ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
+			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
+			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
+
+			for txIndex, data := range block.Data.Data {
 				localTransaction := &Transaction{}
 				//Get envelope which is stored as byte array in the data field.
 				envelope, err := utils.GetEnvelopeFromBlock(data)
@@ -299,7 +325,7 @@ func main() {
 					fmt.Printf("Error unmarshaling chaincode action events:%s\n", err)
 				}
 				localTransaction.Events = events
-				localBlock.Transactions = append(localBlock.Transactions, localTransaction)
+
 				txReadWriteSet := &rwset.TxReadWriteSet{}
 				if err := proto.Unmarshal(chaincodeAction.Results, txReadWriteSet); err != nil {
 					fmt.Printf("Error unmarshaling chaincode action results: %s\n", err)
@@ -317,21 +343,13 @@ func main() {
 						localTransaction.NsRwset = append(localTransaction.NsRwset, nsReadWriteSet)
 					}
 				}
-			}
 
-			localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
-			lastConfigBlockNumber := &LastConfigMetadata{}
-			lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
-			lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
-			localBlock.LastConfigBlockNumber = lastConfigBlockNumber
-			txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
-			for index, b := range txBytes {
-				localBlock.TransactionFilter[index] = uint8(b)
+				// add the transaction validation a
+				addTransactionValidation(&localBlock, localTransaction, txIndex)
+
+				//append the transaction
+				localBlock.Transactions = append(localBlock.Transactions, localTransaction)
 			}
-			ordererKafkaMetadata := &OrdererMetadata{}
-			ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
-			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
-			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
 			blockJSON, _ := json.Marshal(localBlock)
 			blockJSONString, _ := prettyprint(blockJSON)
 			fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)

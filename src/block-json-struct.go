@@ -44,6 +44,9 @@ type Transaction struct {
 	Events                  *pb.ChaincodeEvent `json:"events,omitempty"`
 	Response                *pb.Response       `json:"response,omitempty"`
 	NsRwset                 []*NsReadWriteSet  `json:"ns_read_write_Set,omitempty"`
+	// Capture transaction validation code
+	ValidationCode     uint8  `json:"validation_code"`
+	ValidationCodeName string `json:"validation_code_name,omitempty"`
 }
 
 type ChannelHeader struct {
