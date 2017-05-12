@@ -1,0 +1,783 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$ref": "#/definitions/object_17",
+  "definitions": {
+    "object_01": {
+      "title": "chaincode_id",
+      "type": "object",
+      "required": [
+        "name",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "object_02": {
+      "title": "channel_header",
+      "type": "object",
+      "required": [
+        "type",
+        "timestamp",
+        "channel_id",
+        "tx_id",
+        "chaincode_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "number"
+        },
+        "timestamp": {
+          "title": "timestamp",
+          "type": "object",
+          "required": [
+            "seconds",
+            "nanos"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "seconds": {
+              "type": "number"
+            },
+            "nanos": {
+              "type": "number"
+            }
+          }
+        },
+        "channel_id": {
+          "type": "string"
+        },
+        "tx_id": {
+          "type": "string"
+        },
+        "chaincode_id": {
+          "$ref": "#/definitions/object_01"
+        }
+      }
+    },
+    "object_03": {
+      "title": "PublicKey",
+      "type": "object",
+      "required": [
+        "Curve",
+        "X",
+        "Y"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Curve": {
+          "title": "Curve",
+          "type": "object",
+          "required": [
+            "P",
+            "N",
+            "B",
+            "Gx",
+            "Gy",
+            "BitSize",
+            "Name"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "P": {
+              "type": "number"
+            },
+            "N": {
+              "type": "number"
+            },
+            "B": {
+              "type": "number"
+            },
+            "Gx": {
+              "type": "number"
+            },
+            "Gy": {
+              "type": "number"
+            },
+            "BitSize": {
+              "type": "number"
+            },
+            "Name": {
+              "type": "string"
+            }
+          }
+        },
+        "X": {
+          "type": "number"
+        },
+        "Y": {
+          "type": "number"
+        }
+      }
+    },
+    "object_04": {
+      "type": "object",
+      "required": [
+        "Type",
+        "Value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/array_02"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "object_05": {
+      "type": "object",
+      "required": [
+        "Country",
+        "Organization",
+        "OrganizationalUnit",
+        "Locality",
+        "Province",
+        "StreetAddress",
+        "PostalCode",
+        "SerialNumber",
+        "CommonName",
+        "Names",
+        "ExtraNames"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Country": {
+          "$ref": "#/definitions/array_01"
+        },
+        "Organization": {
+          "$ref": "#/definitions/array_01"
+        },
+        "OrganizationalUnit": {
+          "$ref": "#/definitions/array_01"
+        },
+        "Locality": {
+          "$ref": "#/definitions/array_01"
+        },
+        "Province": {
+          "$ref": "#/definitions/array_01"
+        },
+        "StreetAddress": {
+          "type": "null"
+        },
+        "PostalCode": {
+          "type": "null"
+        },
+        "SerialNumber": {
+          "type": "string"
+        },
+        "CommonName": {
+          "type": "string"
+        },
+        "Names": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/array_03"
+            },
+            {
+              "$ref": "#/definitions/array_04"
+            }
+          ]
+        },
+        "ExtraNames": {
+          "type": "null"
+        }
+      }
+    },
+    "object_06": {
+      "type": "object",
+      "required": [
+        "Id",
+        "Critical",
+        "Value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "$ref": "#/definitions/array_02"
+        },
+        "Critical": {
+          "type": "boolean"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "object_07": {
+      "title": "Certificate",
+      "type": "object",
+      "required": [
+        "Raw",
+        "RawTBSCertificate",
+        "RawSubjectPublicKeyInfo",
+        "RawSubject",
+        "RawIssuer",
+        "Signature",
+        "SignatureAlgorithm",
+        "PublicKeyAlgorithm",
+        "PublicKey",
+        "Version",
+        "SerialNumber",
+        "Issuer",
+        "Subject",
+        "NotBefore",
+        "NotAfter",
+        "KeyUsage",
+        "Extensions",
+        "ExtraExtensions",
+        "UnhandledCriticalExtensions",
+        "ExtKeyUsage",
+        "UnknownExtKeyUsage",
+        "BasicConstraintsValid",
+        "IsCA",
+        "MaxPathLen",
+        "MaxPathLenZero",
+        "SubjectKeyId",
+        "AuthorityKeyId",
+        "OCSPServer",
+        "IssuingCertificateURL",
+        "DNSNames",
+        "EmailAddresses",
+        "IPAddresses",
+        "PermittedDNSDomainsCritical",
+        "PermittedDNSDomains",
+        "CRLDistributionPoints",
+        "PolicyIdentifiers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Raw": {
+          "type": "string"
+        },
+        "RawTBSCertificate": {
+          "type": "string"
+        },
+        "RawSubjectPublicKeyInfo": {
+          "type": "string"
+        },
+        "RawSubject": {
+          "type": "string"
+        },
+        "RawIssuer": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        },
+        "SignatureAlgorithm": {
+          "type": "number"
+        },
+        "PublicKeyAlgorithm": {
+          "type": "number"
+        },
+        "PublicKey": {
+          "$ref": "#/definitions/object_03"
+        },
+        "Version": {
+          "type": "number"
+        },
+        "SerialNumber": {
+          "type": "number"
+        },
+        "Issuer": {
+          "$ref": "#/definitions/object_05"
+        },
+        "Subject": {
+          "$ref": "#/definitions/object_05"
+        },
+        "NotBefore": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "NotAfter": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "KeyUsage": {
+          "type": "number"
+        },
+        "Extensions": {
+          "$ref": "#/definitions/array_05"
+        },
+        "ExtraExtensions": {
+          "type": "null"
+        },
+        "UnhandledCriticalExtensions": {
+          "type": "null"
+        },
+        "ExtKeyUsage": {
+          "$ref": "#/definitions/array_06"
+        },
+        "UnknownExtKeyUsage": {
+          "type": "null"
+        },
+        "BasicConstraintsValid": {
+          "type": "boolean"
+        },
+        "IsCA": {
+          "type": "boolean"
+        },
+        "MaxPathLen": {
+          "type": "number"
+        },
+        "MaxPathLenZero": {
+          "type": "boolean"
+        },
+        "SubjectKeyId": {
+          "type": "string"
+        },
+        "AuthorityKeyId": {
+          "type": "string"
+        },
+        "OCSPServer": {
+          "type": "null"
+        },
+        "IssuingCertificateURL": {
+          "type": "null"
+        },
+        "DNSNames": {
+          "$ref": "#/definitions/array_07"
+        },
+        "EmailAddresses": {
+          "type": "null"
+        },
+        "IPAddresses": {
+          "type": "null"
+        },
+        "PermittedDNSDomainsCritical": {
+          "type": "boolean"
+        },
+        "PermittedDNSDomains": {
+          "type": "null"
+        },
+        "CRLDistributionPoints": {
+          "type": "null"
+        },
+        "PolicyIdentifiers": {
+          "type": "null"
+        }
+      }
+    },
+    "object_08": {
+      "type": "object",
+      "required": [
+        "Certificate",
+        "nonce"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Certificate": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/object_07"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nonce": {
+          "type": "string"
+        }
+      }
+    },
+    "object_09": {
+      "title": "input",
+      "type": "object",
+      "required": [
+        "Args"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Args": {
+          "$ref": "#/definitions/array_01"
+        }
+      }
+    },
+    "object_10": {
+      "title": "chaincode_spec",
+      "type": "object",
+      "required": [
+        "type",
+        "chaincode_id",
+        "input"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "number"
+        },
+        "chaincode_id": {
+          "$ref": "#/definitions/object_01"
+        },
+        "input": {
+          "$ref": "#/definitions/object_09"
+        }
+      }
+    },
+    "object_11": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    },
+    "object_12": {
+      "type": "object",
+      "required": [
+        "key",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "version": {
+          "title": "version",
+          "type": "object",
+          "required": [
+            "block_num"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "block_num": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "object_13": {
+      "type": "object",
+      "required": [
+        "Namespace",
+        "KVRWSet"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Namespace": {
+          "type": "string"
+        },
+        "KVRWSet": {
+          "$ref": "#/definitions/object_14"
+        }
+      }
+    },
+    "object_14": {
+      "title": "KVRWSet",
+      "type": "object",
+      "required": [
+        "reads"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reads": {
+          "type": "array",
+          "title": "reads",
+          "items": {
+            "$ref": "#/definitions/object_12"
+          }
+        },
+        "writes": {
+          "type": "array",
+          "title": "writes",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "value"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "object_15": {
+      "type": "object",
+      "required": [
+        "signature",
+        "signature_header"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "channel_header": {
+          "$ref": "#/definitions/object_02"
+        },
+        "signature_header": {
+          "$ref": "#/definitions/object_08"
+        },
+        "tx_action_signature_header": {
+          "$ref": "#/definitions/object_08"
+        },
+        "chaincode_spec": {
+          "$ref": "#/definitions/object_10"
+        },
+        "endorsements": {
+          "$ref": "#/definitions/array_08"
+        },
+        "proposal_hash": {
+          "type": "string"
+        },
+        "events": {
+          "$ref": "#/definitions/object_11"
+        },
+        "response": {
+          "title": "response",
+          "type": "object",
+          "required": [
+            "status",
+            "payload"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "type": "number"
+            },
+            "payload": {
+              "type": "string"
+            }
+          }
+        },
+        "ns_read_write_Set": {
+          "type": "array",
+          "title": "ns_read_write_Set",
+          "items": {
+            "$ref": "#/definitions/object_13"
+          }
+        },
+        "validation_code": {
+          "type": "number"
+        }
+      }
+    },
+    "object_16": {
+      "title": "last_config_block_number",
+      "type": "object",
+      "required": [
+        "last_config_block_num",
+        "signature_data"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "last_config_block_num": {
+          "type": "number"
+        },
+        "signature_data": {
+          "$ref": "#/definitions/object_15"
+        }
+      }
+    },
+    "object_17": {
+      "type": "object",
+      "required": [
+        "header",
+        "transactions",
+        "block_creator_signature",
+        "last_config_block_number",
+        "orderer_kafka_metadata"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "title": "header",
+          "type": "object",
+          "required": [
+            "number",
+            "previous_hash",
+            "data_hash"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "number": {
+              "type": "number"
+            },
+            "previous_hash": {
+              "type": "string"
+            },
+            "data_hash": {
+              "type": "string"
+            }
+          }
+        },
+        "transactions": {
+          "$ref": "#/definitions/array_08"
+        },
+        "block_creator_signature": {
+          "$ref": "#/definitions/object_15"
+        },
+        "last_config_block_number": {
+          "$ref": "#/definitions/object_16"
+        },
+        "orderer_kafka_metadata": {
+          "$ref": "#/definitions/object_11"
+        }
+      }
+    },
+    "array_01": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "array_02": {
+      "type": "array",
+      "title": "Type, Id",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 4,
+      "maxItems": 4,
+      "items": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "array_03": {
+      "type": "array",
+      "title": "Names",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 6,
+      "maxItems": 6,
+      "items": [
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        }
+      ]
+    },
+    "array_04": {
+      "type": "array",
+      "title": "Names",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 5,
+      "maxItems": 5,
+      "items": [
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        },
+        {
+          "$ref": "#/definitions/object_04"
+        }
+      ]
+    },
+    "array_05": {
+      "type": "array",
+      "title": "Extensions",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 6,
+      "maxItems": 6,
+      "items": [
+        {
+          "$ref": "#/definitions/object_06"
+        },
+        {
+          "$ref": "#/definitions/object_06"
+        },
+        {
+          "$ref": "#/definitions/object_06"
+        },
+        {
+          "$ref": "#/definitions/object_06"
+        },
+        {
+          "$ref": "#/definitions/object_06"
+        },
+        {
+          "$ref": "#/definitions/object_06"
+        }
+      ]
+    },
+    "array_06": {
+      "type": "array",
+      "title": "ExtKeyUsage",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "array_07": {
+      "type": "array",
+      "title": "DNSNames",
+      "description": "tuple type",
+      "additionalItems": false,
+      "minItems": 2,
+      "maxItems": 2,
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "array_08": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/object_15"
+      }
+    }
+  }
+}
