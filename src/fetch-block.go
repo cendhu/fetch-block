@@ -11,7 +11,7 @@ import (
 	"strconv"
 
 	"github.com/golang/protobuf/proto"
-	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
+	//ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	cb "github.com/hyperledger/fabric/protos/common"
 	"github.com/hyperledger/fabric/protos/ledger/rwset"
@@ -175,14 +175,45 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 
 }
 
-// This method add transaction validation information from block TransactionFilter struct
-func addTransactionValidation(block *Block, tran *Transaction, txIdx int) error {
-	if len(block.TransactionFilter) > txIdx {
-		tran.ValidationCode = block.TransactionFilter[txIdx]
-		tran.ValidationCodeName = pb.TxValidationCode_name[int32(tran.ValidationCode)]
-		return nil
+func getValidationCode(code uint8) string {
+	if code == 0 {
+		return "TxValidationCode_VALID"
+	} else if code == 1 {
+		return "TxValidationCode_NIL_ENVELOPE"
+	} else if code == 2 {
+		return "TxValidationCode_BAD_PAYLOAD"
+	} else if code == 3 {
+		return "TxValidationCode_BAD_COMMON_HEADER"
+	} else if code == 4 {
+		return "TxValidationCode_BAD_CREATOR_SIGNATURE"
+	} else if code == 5 {
+		return "TxValidationCode_INVALID_ENDORSER_TRANSACTION"
+	} else if code == 6 {
+		return "TxValidationCode_INVALID_CONFIG_TRANSACTION"
+	} else if code == 7 {
+		return "TxValidationCode_UNSUPPORTED_TX_PAYLOAD"
+	} else if code == 8 {
+		return "TxValidationCode_BAD_PROPOSAL_TXID"
+	} else if code == 9 {
+		return "TxValidationCode_DUPLICATE_TXID"
+	} else if code == 10 {
+		return "TxValidationCode_ENDORSEMENT_POLICY_FAILURE"
+	} else if code == 11 {
+		return "TxValidationCode_MVCC_READ_CONFLICT"
+	} else if code == 12 {
+		return "TxValidationCode_PHANTOM_READ_CONFLICT"
+	} else if code == 13 {
+		return "TxValidationCode_UNKNOWN_TX_TYPE"
+	} else if code == 14 {
+		return "TxValidationCode_TARGET_CHAIN_NOT_FOUND"
+	} else if code == 15 {
+		return "TxValidationCode_MARSHAL_TX_ERROR"
+	} else if code == 16 {
+		return "TxValidationCode_NIL_TXACTION"
+	} else if code == 255 {
+		return "TxValidationCode_INVALID_OTHER_REASON"
 	}
-	return fmt.Errorf("Invalid index or transaction filler. Index: %d", txIdx)
+	return "Invalid Code"
 }
 
 //var localMsp msp.MSP
@@ -229,31 +260,15 @@ func main() {
 		return
 	}
 	for {
-		fmt.Println("Listening for the event...\n")
+		fmt.Println("\nListening for the event...\n")
 		select {
 		case blockEvent := <-adapter.block_channel:
 			var block *cb.Block
 			var localBlock Block
 			block = blockEvent.Block
 			localBlock.Header = block.Header
-			localBlock.TransactionFilter = ledgerUtil.NewTxValidationFlags(len(block.Data.Data))
-
-			// process block metadata before data
-			localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
-			lastConfigBlockNumber := &LastConfigMetadata{}
-			lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
-			lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
-			localBlock.LastConfigBlockNumber = lastConfigBlockNumber
-			txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
-			for index, b := range txBytes {
-				localBlock.TransactionFilter[index] = uint8(b)
-			}
-			ordererKafkaMetadata := &OrdererMetadata{}
-			ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
-			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
-			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
-
-			for txIndex, data := range block.Data.Data {
+			//localBlock.TransactionFilter = make(string, len(block.Data.Data))
+			for _, data := range block.Data.Data {
 				localTransaction := &Transaction{}
 				//Get envelope which is stored as byte array in the data field.
 				envelope, err := utils.GetEnvelopeFromBlock(data)
@@ -282,8 +297,6 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.SignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//localTransaction.SignatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.SignatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
 				transaction := &pb.Transaction{}
 				if err := proto.Unmarshal(payload.Data, transaction); err != nil {
 					fmt.Printf("Error unmarshaling transaction: %s\n", err)
@@ -297,10 +310,6 @@ func main() {
 					fmt.Printf("Error unmarshaling signature header: %s\n", err)
 				}
 				localTransaction.TxActionSignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//signatureHeader = &SignatureHeader{}
-				//signatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
-				//signatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.TxActionSignatureHeader = signatureHeader
 
 				chaincodeProposalPayload := &pb.ChaincodeProposalPayload{}
 				if err := proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload); err != nil {
@@ -325,7 +334,7 @@ func main() {
 					fmt.Printf("Error unmarshaling chaincode action events:%s\n", err)
 				}
 				localTransaction.Events = events
-
+				localBlock.Transactions = append(localBlock.Transactions, localTransaction)
 				txReadWriteSet := &rwset.TxReadWriteSet{}
 				if err := proto.Unmarshal(chaincodeAction.Results, txReadWriteSet); err != nil {
 					fmt.Printf("Error unmarshaling chaincode action results: %s\n", err)
@@ -339,17 +348,39 @@ func main() {
 						if err := proto.Unmarshal(nsRwset.Rwset, kvRWSet); err != nil {
 							fmt.Printf("Error unmarshaling tx read write set: %s\n", err)
 						}
-						nsReadWriteSet.KVRWSet = kvRWSet
+						localkvRWSet := &KVRWSet{}
+						localkvRWSet.Reads = kvRWSet.Reads
+
+						var writes []*KVWrite
+						for _, write := range kvRWSet.Writes {
+							localWrite := &KVWrite{}
+							localWrite.Key = write.Key
+							localWrite.IsDelete = write.IsDelete
+							localWrite.Value = string(write.Value)
+							writes = append(writes, localWrite)
+						}
+						localkvRWSet.Writes = writes
+						nsReadWriteSet.KVRWSet = localkvRWSet
 						localTransaction.NsRwset = append(localTransaction.NsRwset, nsReadWriteSet)
 					}
 				}
-
-				// add the transaction validation a
-				addTransactionValidation(&localBlock, localTransaction, txIndex)
-
-				//append the transaction
-				localBlock.Transactions = append(localBlock.Transactions, localTransaction)
 			}
+
+			localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
+			lastConfigBlockNumber := &LastConfigMetadata{}
+			lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
+			lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
+			localBlock.LastConfigBlockNumber = lastConfigBlockNumber
+			txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
+			var filter []string
+			for _, b := range txBytes {
+				filter = append(filter, getValidationCode(uint8(b)))
+			}
+			localBlock.TransactionFilter = filter
+			ordererKafkaMetadata := &OrdererMetadata{}
+			ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
+			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
+			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
 			blockJSON, _ := json.Marshal(localBlock)
 			blockJSONString, _ := prettyprint(blockJSON)
 			fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)

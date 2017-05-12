@@ -17,19 +17,47 @@ limitations under the License.
 package producer
 
 import (
+	"fmt"
 
 	"github.com/hyperledger/fabric/protos/common"
 	pb "github.com/hyperledger/fabric/protos/peer"
+	"github.com/hyperledger/fabric/protos/utils"
 )
 
 // SendProducerBlockEvent sends block event to clients
 func SendProducerBlockEvent(block *common.Block) error {
 	logger.Debugf("Entry")
 	defer logger.Debugf("Exit")
+	bevent := &common.Block{}
+	bevent.Header = block.Header
+	bevent.Metadata = block.Metadata
+	bevent.Data = block.Data
+	var channelId string
+	for _, d := range block.Data.Data {
+		ebytes := d
+		if ebytes != nil {
+			if env, err := utils.GetEnvelopeFromBlock(ebytes); err != nil {
+				logger.Errorf("error getting tx from block(%s)\n", err)
+			} else if env != nil {
+				// get the payload from the envelope
+				payload, err := utils.GetPayload(env)
+				if err != nil {
+					return fmt.Errorf("could not extract payload from envelope, err %s", err)
+				}
 
-	logger.Infof("Sending event for block number [%d]", block.Header.Number)
+				chdr, err := utils.UnmarshalChannelHeader(payload.Header.ChannelHeader)
+				if err != nil {
+					return err
+				}
+				channelId = chdr.ChannelId
+			}
+		}
+		bevent.Data.Data = append(bevent.Data.Data, ebytes)
+	}
 
-	return Send(CreateBlockEvent(block))
+	logger.Infof("Channel [%s]: Sending event for block number [%d]", channelId, block.Header.Number)
+
+	return Send(CreateBlockEvent(bevent))
 }
 
 //CreateBlockEvent creates a Event from a Block

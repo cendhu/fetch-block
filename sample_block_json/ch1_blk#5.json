@@ -1,22 +1,23 @@
 {
   "header": {
-    "number": 1,
-    "previous_hash": "7jOQ0NF5fbcbGpmcsX6rBbnx2ZZzDKouNYKScvMXmy8=",
-    "data_hash": "cTusVIUYqv9YBL4zjcGvNI1RWKhnPqECF84zQ+r57ys="
+    "number": 5,
+    "previous_hash": "Q9or94LrmPOKp6Z8LlGUsVZmlNFWNeR1H8khUU1zq0s=",
+    "data_hash": "71ZuQcqG1VeZYM2Xsi780QLmg3eG6csw3ankEuqPOsQ="
   },
   "transactions": [
     {
-      "signature": "MEUCIQCv1njq9CKjG5U7Zuz4+EfK9uGXMt2HEeBo0d41NEjIlQIgWkChZf1uMtVlc45BcaP0/Q82VjfJo245+ucBB4dNXV0=",
+      "signature": "MEUCIQDwLADIafRGZ+yvzltlWv8bMbWuJF2STrnv9ymVPiCvwgIgGFmuCkhEELfNbSYEIUTKUCzTuiSxJZeF5XkrmpJM5Pg=",
       "channel_header": {
         "type": 3,
         "timestamp": {
-          "seconds": 1494408374,
-          "nanos": 61792586
+          "seconds": 1494408474,
+          "nanos": 989564209
         },
         "channel_id": "ch1",
-        "tx_id": "d877d55c25c8580c16f4e3dbe107b63873d6b5a35c3055437de2dd7a946f468d",
+        "tx_id": "dcccd66fe1af554772c92340e2fc20963b94abeec8757d27046925caad491750",
         "chaincode_id": {
-          "name": "lscc"
+          "name": "mycc1",
+          "version": "0"
         }
       },
       "signature_header": {
@@ -282,7 +283,7 @@
           "CRLDistributionPoints": null,
           "PolicyIdentifiers": null
         },
-        "nonce": "uQRplSZVPQk1L6nUoeeCAQkoAjPXaX+h"
+        "nonce": "RCK1CI1yoqYNoqplonG3DMnETHx5iFQw"
       },
       "tx_action_signature_header": {
         "Certificate": {
@@ -547,21 +548,18 @@
           "CRLDistributionPoints": null,
           "PolicyIdentifiers": null
         },
-        "nonce": "uQRplSZVPQk1L6nUoeeCAQkoAjPXaX+h"
+        "nonce": "RCK1CI1yoqYNoqplonG3DMnETHx5iFQw"
       },
       "chaincode_spec": {
         "type": 1,
         "chaincode_id": {
-          "name": "lscc"
+          "name": "mycc1",
+          "version": "0"
         },
         "input": {
           "Args": [
-            "deploy",
-            "ch1",
-            "\nU\u0008\u0001\u0012I\n=github.com/hyperledger/fabric/examples/chaincode/go/marbles02\u0012\u0005mycc1\u001a\u00010\u001a\u0006\n\u0004init",
-            "",
-            "escc",
-            "vscc"
+            "delete",
+            "marble1"
           ]
         }
       },
@@ -571,14 +569,13 @@
             "Certificate": null,
             "nonce": "LS0tLS1CRUdJTiAtLS0tLQpNSUlDaXpDQ0FqS2dBd0lCQWdJVUJFVndzU3gwVG1xZGJ6TndsZU5CQnpvSVQwd3dDZ1lJS29aSXpqMEVBd0l3CmZ6RUxNQWtHQTFVRUJoTUNWVk14RXpBUkJnTlZCQWdUQ2tOaGJHbG1iM0p1YVdFeEZqQVVCZ05WQkFjVERWTmgKYmlCR2NtRnVZMmx6WTI4eEh6QWRCZ05WQkFvVEZrbHVkR1Z5Ym1WMElGZHBaR2RsZEhNc0lFbHVZeTR4RERBSwpCZ05WQkFzVEExZFhWekVVTUJJR0ExVUVBeE1MWlhoaGJYQnNaUzVqYjIwd0hoY05NVFl4TVRFeE1UY3dOekF3CldoY05NVGN4TVRFeE1UY3dOekF3V2pCak1Rc3dDUVlEVlFRR0V3SlZVekVYTUJVR0ExVUVDQk1PVG05eWRHZ2cKUTJGeWIyeHBibUV4RURBT0JnTlZCQWNUQjFKaGJHVnBaMmd4R3pBWkJnTlZCQW9URWtoNWNHVnliR1ZrWjJWeQpJRVpoWW5KcFl6RU1NQW9HQTFVRUN4TURRMDlRTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFCkhCdUtzQU80M2hzNEpHcEZmaUdNa0IveHNJTFRzT3ZtTjJXbXdwc1BIWk5MNnc4SFdlM3hDUFF0ZEcvWEpKdloKK0M3NTZLRXNVQk0zeXc1UFRma3U4cU9CcHpDQnBEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZdwpGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGT0ZDCmRjVVo0ZXMzbHRpQ2dBVkRveUxmVnBQSU1COEdBMVVkSXdRWU1CYUFGQmRuUWoycW5vSS94TVVkbjF2RG1kRzEKbkVnUU1DVUdBMVVkRVFRZU1CeUNDbTE1YUc5emRDNWpiMjJDRG5kM2R5NXRlV2h2YzNRdVkyOXRNQW9HQ0NxRwpTTTQ5QkFNQ0EwY0FNRVFDSURmOUhibDR4bjN6NEV3TkttaWxNOWxYMkZxNGpXcEFhUlZCOTdPbVZFZXlBaUFrCmFYekIvam5sVTM5QjdXd3M5QklyOWM4bVNPRVBGNlZZMXVHUCtkS1YwZz09Ci0tLS0tRU5EIC0tLS0tCg=="
           },
-          "signature": "MEQCIH4AIcqjjMt7lqrsFefAKxP8I/cnApBZAc9JYnzB/PEhAiA1ZWzjeo0Eja0ooNjrBNN8x497LZJPuP/u4bOAyoWtBA=="
+          "signature": "MEUCIQCV7OsWN0ito5Etg4F9QgGNq1vPb1+im4gbiiDQZwgKqQIgfQ04j7Or0cuAHwA1OwyH/sYTdsHO1GHVS8/tBhe3odM="
         }
       ],
-      "proposal_hash": "IoswFOsI363vFo6ISZBJJ/t4gJ4rKooiKgVRH8aE6IE=",
+      "proposal_hash": "3jNghq4JSAk3sgryKJbGSg90rbrgL64Qbd97sVyWQLs=",
       "events": {},
       "response": {
-        "status": 200,
-        "payload": "CgVteWNjMRIBMBoEZXNjYyIEdnNjYyoXEggSBggBEgIIABoLEgkKB0RFRkFVTFQyRAogquUky57SS92Cb85wSnuhlV+gvigV3a7KPhr2Y/gJU/YSIBJW9jEOgw660xBRh2mFJP1WdFZcmBhMKM9J5uz1pkaUOiBFjc/Yv2uWPBX3eI7yRg36BfSEQzkB3gnkYkEOGL010kIZEggSBggBEgIIABoNEgsKB0RFRkFVTFQQAQ=="
+        "status": 200
       },
       "ns_read_write_Set": [
         {
@@ -586,13 +583,33 @@
           "KVRWSet": {
             "reads": [
               {
-                "key": "mycc1"
+                "key": "mycc1",
+                "version": {
+                  "block_num": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Namespace": "mycc1",
+          "KVRWSet": {
+            "reads": [
+              {
+                "key": "marble1",
+                "version": {
+                  "block_num": 4
+                }
               }
             ],
             "writes": [
               {
-                "key": "mycc1",
-                "value": "\n\u0005mycc1\u0012\u00010\u001a\u0004escc\"\u0004vscc*\u0017\u0012\u0008\u0012\u0006\u0008\u0001\u0012\u0002\u0008\u0000\u001a\u000b\u0012\t\n\u0007DEFAULT2D\n \ufffd\ufffd$˞\ufffdK݂o\ufffdpJ{\ufffd\ufffd_\ufffd\ufffd(\u0015ݮ\ufffd\u003e\u001a\ufffdc\ufffd\tS\ufffd\u0012 \u0012V\ufffd1\u000e\ufffd\u000e\ufffd\ufffd\u0010Q\ufffdi\ufffd$\ufffdVtV\\\ufffd\u0018L(\ufffdI\ufffd\ufffd\ufffd\ufffdF\ufffd: E\ufffd\ufffdؿk\ufffd\u003c\u0015\ufffdx\ufffd\ufffdF\r\ufffd\u0005\ufffd\ufffdC9\u0001\ufffd\t\ufffdbA\u000e\u0018\ufffd5\ufffdB\u0019\u0012\u0008\u0012\u0006\u0008\u0001\u0012\u0002\u0008\u0000\u001a\r\u0012\u000b\n\u0007DEFAULT\u0010\u0001"
+                "key": "\u0000color~name\u0000blue\u0000marble1\u0000",
+                "is_delete": true
+              },
+              {
+                "key": "marble1",
+                "is_delete": true
               }
             ]
           }
@@ -601,17 +618,18 @@
       "validation_code": 0
     },
     {
-      "signature": "MEUCIQCv1njq9CKjG5U7Zuz4+EfK9uGXMt2HEeBo0d41NEjIlQIgWkChZf1uMtVlc45BcaP0/Q82VjfJo245+ucBB4dNXV0=",
+      "signature": "MEUCIQDwLADIafRGZ+yvzltlWv8bMbWuJF2STrnv9ymVPiCvwgIgGFmuCkhEELfNbSYEIUTKUCzTuiSxJZeF5XkrmpJM5Pg=",
       "channel_header": {
         "type": 3,
         "timestamp": {
-          "seconds": 1494408374,
-          "nanos": 61792586
+          "seconds": 1494408474,
+          "nanos": 989564209
         },
         "channel_id": "ch1",
-        "tx_id": "d877d55c25c8580c16f4e3dbe107b63873d6b5a35c3055437de2dd7a946f468d",
+        "tx_id": "dcccd66fe1af554772c92340e2fc20963b94abeec8757d27046925caad491750",
         "chaincode_id": {
-          "name": "lscc"
+          "name": "mycc1",
+          "version": "0"
         }
       },
       "signature_header": {
@@ -877,7 +895,7 @@
           "CRLDistributionPoints": null,
           "PolicyIdentifiers": null
         },
-        "nonce": "uQRplSZVPQk1L6nUoeeCAQkoAjPXaX+h"
+        "nonce": "RCK1CI1yoqYNoqplonG3DMnETHx5iFQw"
       },
       "tx_action_signature_header": {
         "Certificate": {
@@ -1142,21 +1160,18 @@
           "CRLDistributionPoints": null,
           "PolicyIdentifiers": null
         },
-        "nonce": "uQRplSZVPQk1L6nUoeeCAQkoAjPXaX+h"
+        "nonce": "RCK1CI1yoqYNoqplonG3DMnETHx5iFQw"
       },
       "chaincode_spec": {
         "type": 1,
         "chaincode_id": {
-          "name": "lscc"
+          "name": "mycc1",
+          "version": "0"
         },
         "input": {
           "Args": [
-            "deploy",
-            "ch1",
-            "\nU\u0008\u0001\u0012I\n=github.com/hyperledger/fabric/examples/chaincode/go/marbles02\u0012\u0005mycc1\u001a\u00010\u001a\u0006\n\u0004init",
-            "",
-            "escc",
-            "vscc"
+            "delete",
+            "marble1"
           ]
         }
       },
@@ -1166,14 +1181,13 @@
             "Certificate": null,
             "nonce": "LS0tLS1CRUdJTiAtLS0tLQpNSUlDaXpDQ0FqS2dBd0lCQWdJVUJFVndzU3gwVG1xZGJ6TndsZU5CQnpvSVQwd3dDZ1lJS29aSXpqMEVBd0l3CmZ6RUxNQWtHQTFVRUJoTUNWVk14RXpBUkJnTlZCQWdUQ2tOaGJHbG1iM0p1YVdFeEZqQVVCZ05WQkFjVERWTmgKYmlCR2NtRnVZMmx6WTI4eEh6QWRCZ05WQkFvVEZrbHVkR1Z5Ym1WMElGZHBaR2RsZEhNc0lFbHVZeTR4RERBSwpCZ05WQkFzVEExZFhWekVVTUJJR0ExVUVBeE1MWlhoaGJYQnNaUzVqYjIwd0hoY05NVFl4TVRFeE1UY3dOekF3CldoY05NVGN4TVRFeE1UY3dOekF3V2pCak1Rc3dDUVlEVlFRR0V3SlZVekVYTUJVR0ExVUVDQk1PVG05eWRHZ2cKUTJGeWIyeHBibUV4RURBT0JnTlZCQWNUQjFKaGJHVnBaMmd4R3pBWkJnTlZCQW9URWtoNWNHVnliR1ZrWjJWeQpJRVpoWW5KcFl6RU1NQW9HQTFVRUN4TURRMDlRTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFCkhCdUtzQU80M2hzNEpHcEZmaUdNa0IveHNJTFRzT3ZtTjJXbXdwc1BIWk5MNnc4SFdlM3hDUFF0ZEcvWEpKdloKK0M3NTZLRXNVQk0zeXc1UFRma3U4cU9CcHpDQnBEQU9CZ05WSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZdwpGQVlJS3dZQkJRVUhBd0VHQ0NzR0FRVUZCd01DTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGT0ZDCmRjVVo0ZXMzbHRpQ2dBVkRveUxmVnBQSU1COEdBMVVkSXdRWU1CYUFGQmRuUWoycW5vSS94TVVkbjF2RG1kRzEKbkVnUU1DVUdBMVVkRVFRZU1CeUNDbTE1YUc5emRDNWpiMjJDRG5kM2R5NXRlV2h2YzNRdVkyOXRNQW9HQ0NxRwpTTTQ5QkFNQ0EwY0FNRVFDSURmOUhibDR4bjN6NEV3TkttaWxNOWxYMkZxNGpXcEFhUlZCOTdPbVZFZXlBaUFrCmFYekIvam5sVTM5QjdXd3M5QklyOWM4bVNPRVBGNlZZMXVHUCtkS1YwZz09Ci0tLS0tRU5EIC0tLS0tCg=="
           },
-          "signature": "MEQCIH4AIcqjjMt7lqrsFefAKxP8I/cnApBZAc9JYnzB/PEhAiA1ZWzjeo0Eja0ooNjrBNN8x497LZJPuP/u4bOAyoWtBA=="
+          "signature": "MEUCIQCV7OsWN0ito5Etg4F9QgGNq1vPb1+im4gbiiDQZwgKqQIgfQ04j7Or0cuAHwA1OwyH/sYTdsHO1GHVS8/tBhe3odM="
         }
       ],
-      "proposal_hash": "IoswFOsI363vFo6ISZBJJ/t4gJ4rKooiKgVRH8aE6IE=",
+      "proposal_hash": "3jNghq4JSAk3sgryKJbGSg90rbrgL64Qbd97sVyWQLs=",
       "events": {},
       "response": {
-        "status": 200,
-        "payload": "CgVteWNjMRIBMBoEZXNjYyIEdnNjYyoXEggSBggBEgIIABoLEgkKB0RFRkFVTFQyRAogquUky57SS92Cb85wSnuhlV+gvigV3a7KPhr2Y/gJU/YSIBJW9jEOgw660xBRh2mFJP1WdFZcmBhMKM9J5uz1pkaUOiBFjc/Yv2uWPBX3eI7yRg36BfSEQzkB3gnkYkEOGL010kIZEggSBggBEgIIABoNEgsKB0RFRkFVTFQQAQ=="
+        "status": 200
       },
       "ns_read_write_Set": [
         {
@@ -1181,13 +1195,33 @@
           "KVRWSet": {
             "reads": [
               {
-                "key": "mycc1"
+                "key": "mycc1",
+                "version": {
+                  "block_num": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Namespace": "mycc1",
+          "KVRWSet": {
+            "reads": [
+              {
+                "key": "marble1",
+                "version": {
+                  "block_num": 4
+                }
               }
             ],
             "writes": [
               {
-                "key": "mycc1",
-                "value": "\n\u0005mycc1\u0012\u00010\u001a\u0004escc\"\u0004vscc*\u0017\u0012\u0008\u0012\u0006\u0008\u0001\u0012\u0002\u0008\u0000\u001a\u000b\u0012\t\n\u0007DEFAULT2D\n \ufffd\ufffd$˞\ufffdK݂o\ufffdpJ{\ufffd\ufffd_\ufffd\ufffd(\u0015ݮ\ufffd\u003e\u001a\ufffdc\ufffd\tS\ufffd\u0012 \u0012V\ufffd1\u000e\ufffd\u000e\ufffd\ufffd\u0010Q\ufffdi\ufffd$\ufffdVtV\\\ufffd\u0018L(\ufffdI\ufffd\ufffd\ufffd\ufffdF\ufffd: E\ufffd\ufffdؿk\ufffd\u003c\u0015\ufffdx\ufffd\ufffdF\r\ufffd\u0005\ufffd\ufffdC9\u0001\ufffd\t\ufffdbA\u000e\u0018\ufffd5\ufffdB\u0019\u0012\u0008\u0012\u0006\u0008\u0001\u0012\u0002\u0008\u0000\u001a\r\u0012\u000b\n\u0007DEFAULT\u0010\u0001"
+                "key": "\u0000color~name\u0000blue\u0000marble1\u0000",
+                "is_delete": true
+              },
+              {
+                "key": "marble1",
+                "is_delete": true
               }
             ]
           }
@@ -1460,9 +1494,9 @@
         "CRLDistributionPoints": null,
         "PolicyIdentifiers": null
       },
-      "nonce": "emeR/tljNBSjQ3yya9BAqyh/xFwS7OWs"
+      "nonce": "PLscNpmLxP4dDccbOqs/HiKQWyM7dL4U"
     },
-    "signature": "MEQCIETejTF9Vao0TGoXj8Fg8MbN4Hq55P+VczpVa7BOSR8DAiBxeF0vGBlLdWczM4+91fqCoPWEBX5qxK91wdcXP6hVYw=="
+    "signature": "MEQCICpV+QbXrO0X8qgueAGcWVb9KHVrH6606yfbaHRPNmj7AiAPLtURMHQpLR22rYENcOJZ3em//NGJc5w4ghITRgA3uQ=="
   },
   "last_config_block_number": {
     "last_config_block_num": 1,
@@ -1730,9 +1764,9 @@
           "CRLDistributionPoints": null,
           "PolicyIdentifiers": null
         },
-        "nonce": "nyoj++zHc4bRBX3+7cvKrA5UiGSQTLE2"
+        "nonce": "qYQe/nlTJjnAOTLsby1RiIQqBAVf2jls"
       },
-      "signature": "MEUCIQDaAnfezq5WFTMx18Af0zLxhGMGxQjOF1PXmsrHtJWZjAIgW/4uEVIGd7ppeDs+seytDeeclsmR894ax4IschsAEZE="
+      "signature": "MEQCICDxbtqndGPYQnEpsSp3Vd2P+OTB+IlyWsO9femzpHj9AiA5FWHvpli4uzkfnCh1WpAdGrN9GvJkG8ZlP+gDMOgo+Q=="
     }
   },
   "orderer_kafka_metadata": {}
