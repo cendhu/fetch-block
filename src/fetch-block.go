@@ -204,7 +204,7 @@ type BlockPerf struct {
 type TxPerf struct {
 	TxId                   string
 	ProposalSubmissionTime time.Time
-	SubmissionTime         time.Time
+	TxCommitTime           time.Time
 	LatencyNs              int64 // latency in nanoseconds
 }
 
@@ -292,7 +292,7 @@ func processBlock(blockEvent *pb.Event_Block) {
 		blockPerf.TxPerfs = append(blockPerf.TxPerfs, TxPerf{
 			TxId: localChannelHeader.TxId,
 			ProposalSubmissionTime: subTime.Local(),
-			SubmissionTime:         now,
+			TxCommitTime:           now,
 			LatencyNs:              now.Sub(subTime).Nanoseconds(),
 		})
 		// Performance measurement code ends
