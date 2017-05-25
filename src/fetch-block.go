@@ -9,8 +9,12 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
+
+	"sync"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/ptypes"
 	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	cb "github.com/hyperledger/fabric/protos/common"
@@ -19,10 +23,11 @@ import (
 	pbmsp "github.com/hyperledger/fabric/protos/msp"
 	ab "github.com/hyperledger/fabric/protos/orderer"
 	pb "github.com/hyperledger/fabric/protos/peer"
-	utils "github.com/hyperledger/fabric/protos/utils"
+	"github.com/hyperledger/fabric/protos/utils"
 	"github.com/spf13/viper"
 )
 
+var expName string // folder of this name is created where all data goes
 var interestedEvents []*pb.Interest
 
 //eventAdapter must implement GetInterestedEvents(), Recv() and Disconnect()
@@ -50,7 +55,7 @@ func (adapter *eventAdapter) Disconnected(err error) {
 func startEventClient(peerEventAddress string) *eventAdapter {
 	var eventClient *EventsClient
 	var err error
-	adapter := &eventAdapter{block_channel: make(chan *pb.Event_Block)}
+	adapter := &eventAdapter{block_channel: make(chan *pb.Event_Block, 100)}
 	eventClient, _ = NewEventsClient(peerEventAddress, 10, adapter)
 	if err = eventClient.Start(); err != nil {
 		fmt.Printf("could not start chat %s\n", err)
@@ -187,7 +192,206 @@ func addTransactionValidation(block *Block, tran *Transaction, txIdx int) error 
 
 //var localMsp msp.MSP
 
+type BlockPerf struct {
+	BlockNumber       int
+	NumValidTx        int
+	NumInvalidTx      int
+	BlockDurationNs   int64 // Difference between block receving time and the time of submission of first proposal in block
+	TxValidationStats map[string]int
+	TxPerfs           []TxPerf
+}
+
+type TxPerf struct {
+	TxId                   string
+	ProposalSubmissionTime time.Time
+	SubmissionTime         time.Time
+	LatencyNs              int64 // latency in nanoseconds
+}
+
+type ThroughPutPerf struct {
+	sync.RWMutex
+	NumValidTx   int
+	NumInvalidTx int
+}
+
+var throughPutPerf ThroughPutPerf
+
+func processBlock(blockEvent *pb.Event_Block) {
+	var block *cb.Block
+	var localBlock Block
+	var now time.Time
+
+	block = blockEvent.Block
+	localBlock.Header = block.Header
+	localBlock.TransactionFilter = ledgerUtil.NewTxValidationFlags(len(block.Data.Data))
+	now = time.Now()
+
+	// process block metadata before data
+	localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
+	lastConfigBlockNumber := &LastConfigMetadata{}
+	lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
+	lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
+	localBlock.LastConfigBlockNumber = lastConfigBlockNumber
+	txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
+	for index, b := range txBytes {
+		localBlock.TransactionFilter[index] = uint8(b)
+	}
+	ordererKafkaMetadata := &OrdererMetadata{}
+	ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
+	ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
+	localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
+
+	var blockPerf BlockPerf
+	blockPerf.TxValidationStats = make(map[string]int)
+	for txIndex, data := range block.Data.Data {
+		localTransaction := &Transaction{}
+		//Get envelope which is stored as byte array in the data field.
+		envelope, err := utils.GetEnvelopeFromBlock(data)
+		if err != nil {
+			fmt.Printf("Error getting envelope: %s\n", err)
+		}
+		localTransaction.Signature = envelope.Signature
+		//Get payload from envelope struct which is stored as byte array.
+		payload, err := utils.GetPayload(envelope)
+		if err != nil {
+			fmt.Printf("Error getting payload from envelope: %s\n", err)
+		}
+		chHeader, err := utils.UnmarshalChannelHeader(payload.Header.ChannelHeader)
+		if err != nil {
+			fmt.Printf("Error unmarshaling channel header: %s\n", err)
+		}
+		headerExtension := &pb.ChaincodeHeaderExtension{}
+		if err := proto.Unmarshal(chHeader.Extension, headerExtension); err != nil {
+			fmt.Printf("Error unmarshaling chaincode header extension: %s\n", err)
+		}
+		localChannelHeader := &ChannelHeader{}
+		copyChannelHeaderToLocalChannelHeader(localChannelHeader, chHeader, headerExtension)
+
+		// Performance measurement code starts
+		subTime, err := ptypes.Timestamp(localChannelHeader.Timestamp)
+		if err != nil {
+			fmt.Printf("Error converting submission timestamp from protobuf.Timestamp to time.Time: %+v\n", err)
+			subTime = now
+		}
+
+		validationCode := localBlock.TransactionFilter[txIndex]
+		validationCodeName := pb.TxValidationCode_name[int32(validationCode)]
+		if validationCode == 0 {
+			blockPerf.NumValidTx++
+			throughPutPerf.Lock()
+			throughPutPerf.NumValidTx++
+			throughPutPerf.Unlock()
+		} else {
+			blockPerf.NumInvalidTx++
+			throughPutPerf.Lock()
+			throughPutPerf.NumInvalidTx++
+			throughPutPerf.Unlock()
+		}
+		blockPerf.TxValidationStats[validationCodeName]++
+
+		blockPerf.TxPerfs = append(blockPerf.TxPerfs, TxPerf{
+			TxId: localChannelHeader.TxId,
+			ProposalSubmissionTime: subTime.Local(),
+			SubmissionTime:         now,
+			LatencyNs:              now.Sub(subTime).Nanoseconds(),
+		})
+		// Performance measurement code ends
+
+		localTransaction.ChannelHeader = localChannelHeader
+		localSignatureHeader := &cb.SignatureHeader{}
+		if err := proto.Unmarshal(payload.Header.SignatureHeader, localSignatureHeader); err != nil {
+			fmt.Printf("Error unmarshaling signature header: %s\n", err)
+		}
+		localTransaction.SignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
+		//localTransaction.SignatureHeader.Nonce = localSignatureHeader.Nonce
+		//localTransaction.SignatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
+		transaction := &pb.Transaction{}
+		if err := proto.Unmarshal(payload.Data, transaction); err != nil {
+			fmt.Printf("Error unmarshaling transaction: %s\n", err)
+		}
+		chaincodeActionPayload, chaincodeAction, err := utils.GetPayloads(transaction.Actions[0])
+		if err != nil {
+			fmt.Printf("Error getting payloads from transaction actions: %s\n", err)
+		}
+		localSignatureHeader = &cb.SignatureHeader{}
+		if err := proto.Unmarshal(transaction.Actions[0].Header, localSignatureHeader); err != nil {
+			fmt.Printf("Error unmarshaling signature header: %s\n", err)
+		}
+		localTransaction.TxActionSignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
+		//signatureHeader = &SignatureHeader{}
+		//signatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
+		//signatureHeader.Nonce = localSignatureHeader.Nonce
+		//localTransaction.TxActionSignatureHeader = signatureHeader
+
+		chaincodeProposalPayload := &pb.ChaincodeProposalPayload{}
+		if err := proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload); err != nil {
+			fmt.Printf("Error unmarshaling chaincode proposal payload: %s\n", err)
+		}
+		chaincodeInvocationSpec := &pb.ChaincodeInvocationSpec{}
+		if err := proto.Unmarshal(chaincodeProposalPayload.Input, chaincodeInvocationSpec); err != nil {
+			fmt.Printf("Error unmarshaling chaincode invocationSpec: %s\n", err)
+		}
+		localChaincodeSpec := &ChaincodeSpec{}
+		copyChaincodeSpecToLocalChaincodeSpec(localChaincodeSpec, chaincodeInvocationSpec.ChaincodeSpec)
+		localTransaction.ChaincodeSpec = localChaincodeSpec
+		copyEndorsementToLocalEndorsement(localTransaction, chaincodeActionPayload.Action.Endorsements)
+		proposalResponsePayload := &pb.ProposalResponsePayload{}
+		if err := proto.Unmarshal(chaincodeActionPayload.Action.ProposalResponsePayload, proposalResponsePayload); err != nil {
+			fmt.Printf("Error unmarshaling proposal response payload: %s\n", err)
+		}
+		localTransaction.ProposalHash = proposalResponsePayload.ProposalHash
+		localTransaction.Response = chaincodeAction.Response
+		events := &pb.ChaincodeEvent{}
+		if err := proto.Unmarshal(chaincodeAction.Events, events); err != nil {
+			fmt.Printf("Error unmarshaling chaincode action events:%s\n", err)
+		}
+		localTransaction.Events = events
+
+		txReadWriteSet := &rwset.TxReadWriteSet{}
+		if err := proto.Unmarshal(chaincodeAction.Results, txReadWriteSet); err != nil {
+			fmt.Printf("Error unmarshaling chaincode action results: %s\n", err)
+		}
+
+		if len(chaincodeAction.Results) != 0 {
+			for _, nsRwset := range txReadWriteSet.NsRwset {
+				nsReadWriteSet := &NsReadWriteSet{}
+				kvRWSet := &kvrwset.KVRWSet{}
+				nsReadWriteSet.Namespace = nsRwset.Namespace
+				if err := proto.Unmarshal(nsRwset.Rwset, kvRWSet); err != nil {
+					fmt.Printf("Error unmarshaling tx read write set: %s\n", err)
+				}
+				nsReadWriteSet.KVRWSet = kvRWSet
+				localTransaction.NsRwset = append(localTransaction.NsRwset, nsReadWriteSet)
+			}
+		}
+
+		// add the transaction validation a
+		addTransactionValidation(&localBlock, localTransaction, txIndex)
+
+		//append the transaction
+		localBlock.Transactions = append(localBlock.Transactions, localTransaction)
+	}
+	blockJSON, _ := json.Marshal(localBlock)
+	blockJSONString, _ := prettyprint(blockJSON)
+	fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
+	fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
+	f, _ := os.Create(expName + "/" + fileName)
+	_, _ = f.WriteString(string(blockJSONString))
+	f.Close()
+
+	blockPerf.BlockDurationNs = blockPerf.TxPerfs[0].LatencyNs
+	blockPerfJSON, _ := json.Marshal(blockPerf)
+	blockPerfJSONString, _ := prettyprint(blockPerfJSON)
+	f, _ = os.Create(expName + "/perf_" + fileName)
+	f.WriteString(string(blockPerfJSONString))
+	f.Close()
+}
+
 func main() {
+	fmt.Println("Enter experiment name (creates folder of this name in working dir):")
+	fmt.Scanln(&expName)
+	os.MkdirAll(expName, os.ModePerm)
+
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")
 	viper.AddConfigPath(".")
@@ -228,134 +432,26 @@ func main() {
 		fmt.Println("Error starting EventClient")
 		return
 	}
+
+	f, _ := os.Create(expName + "/throughput.txt")
+	secondTicker := time.NewTicker(time.Second)
+	fmt.Println("Listening for the event...\n")
 	for {
-		fmt.Println("Listening for the event...\n")
 		select {
 		case blockEvent := <-adapter.block_channel:
-			var block *cb.Block
-			var localBlock Block
-			block = blockEvent.Block
-			localBlock.Header = block.Header
-			localBlock.TransactionFilter = ledgerUtil.NewTxValidationFlags(len(block.Data.Data))
+			fmt.Println("Got a block. Processing.")
+			go processBlock(blockEvent)
+		case <-secondTicker.C:
+			numValidTx := 0
+			numInvalidTx := 0
+			throughPutPerf.Lock()
+			numValidTx = throughPutPerf.NumValidTx
+			numInvalidTx = throughPutPerf.NumInvalidTx
+			throughPutPerf.NumValidTx = 0
+			throughPutPerf.NumInvalidTx = 0
+			throughPutPerf.Unlock()
 
-			// process block metadata before data
-			localBlock.BlockCreatorSignature, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_SIGNATURES)
-			lastConfigBlockNumber := &LastConfigMetadata{}
-			lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
-			lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
-			localBlock.LastConfigBlockNumber = lastConfigBlockNumber
-			txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
-			for index, b := range txBytes {
-				localBlock.TransactionFilter[index] = uint8(b)
-			}
-			ordererKafkaMetadata := &OrdererMetadata{}
-			ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
-			ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
-			localBlock.OrdererKafkaMetadata = ordererKafkaMetadata
-
-			for txIndex, data := range block.Data.Data {
-				localTransaction := &Transaction{}
-				//Get envelope which is stored as byte array in the data field.
-				envelope, err := utils.GetEnvelopeFromBlock(data)
-				if err != nil {
-					fmt.Printf("Error getting envelope: %s\n", err)
-				}
-				localTransaction.Signature = envelope.Signature
-				//Get payload from envelope struct which is stored as byte array.
-				payload, err := utils.GetPayload(envelope)
-				if err != nil {
-					fmt.Printf("Error getting payload from envelope: %s\n", err)
-				}
-				chHeader, err := utils.UnmarshalChannelHeader(payload.Header.ChannelHeader)
-				if err != nil {
-					fmt.Printf("Error unmarshaling channel header: %s\n", err)
-				}
-				headerExtension := &pb.ChaincodeHeaderExtension{}
-				if err := proto.Unmarshal(chHeader.Extension, headerExtension); err != nil {
-					fmt.Printf("Error unmarshaling chaincode header extension: %s\n", err)
-				}
-				localChannelHeader := &ChannelHeader{}
-				copyChannelHeaderToLocalChannelHeader(localChannelHeader, chHeader, headerExtension)
-				localTransaction.ChannelHeader = localChannelHeader
-				localSignatureHeader := &cb.SignatureHeader{}
-				if err := proto.Unmarshal(payload.Header.SignatureHeader, localSignatureHeader); err != nil {
-					fmt.Printf("Error unmarshaling signature header: %s\n", err)
-				}
-				localTransaction.SignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//localTransaction.SignatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.SignatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
-				transaction := &pb.Transaction{}
-				if err := proto.Unmarshal(payload.Data, transaction); err != nil {
-					fmt.Printf("Error unmarshaling transaction: %s\n", err)
-				}
-				chaincodeActionPayload, chaincodeAction, err := utils.GetPayloads(transaction.Actions[0])
-				if err != nil {
-					fmt.Printf("Error getting payloads from transaction actions: %s\n", err)
-				}
-				localSignatureHeader = &cb.SignatureHeader{}
-				if err := proto.Unmarshal(transaction.Actions[0].Header, localSignatureHeader); err != nil {
-					fmt.Printf("Error unmarshaling signature header: %s\n", err)
-				}
-				localTransaction.TxActionSignatureHeader = getSignatureHeaderFromBlockData(localSignatureHeader)
-				//signatureHeader = &SignatureHeader{}
-				//signatureHeader.Certificate, _ = deserializeIdentity(localSignatureHeader.Creator)
-				//signatureHeader.Nonce = localSignatureHeader.Nonce
-				//localTransaction.TxActionSignatureHeader = signatureHeader
-
-				chaincodeProposalPayload := &pb.ChaincodeProposalPayload{}
-				if err := proto.Unmarshal(chaincodeActionPayload.ChaincodeProposalPayload, chaincodeProposalPayload); err != nil {
-					fmt.Printf("Error unmarshaling chaincode proposal payload: %s\n", err)
-				}
-				chaincodeInvocationSpec := &pb.ChaincodeInvocationSpec{}
-				if err := proto.Unmarshal(chaincodeProposalPayload.Input, chaincodeInvocationSpec); err != nil {
-					fmt.Printf("Error unmarshaling chaincode invocationSpec: %s\n", err)
-				}
-				localChaincodeSpec := &ChaincodeSpec{}
-				copyChaincodeSpecToLocalChaincodeSpec(localChaincodeSpec, chaincodeInvocationSpec.ChaincodeSpec)
-				localTransaction.ChaincodeSpec = localChaincodeSpec
-				copyEndorsementToLocalEndorsement(localTransaction, chaincodeActionPayload.Action.Endorsements)
-				proposalResponsePayload := &pb.ProposalResponsePayload{}
-				if err := proto.Unmarshal(chaincodeActionPayload.Action.ProposalResponsePayload, proposalResponsePayload); err != nil {
-					fmt.Printf("Error unmarshaling proposal response payload: %s\n", err)
-				}
-				localTransaction.ProposalHash = proposalResponsePayload.ProposalHash
-				localTransaction.Response = chaincodeAction.Response
-				events := &pb.ChaincodeEvent{}
-				if err := proto.Unmarshal(chaincodeAction.Events, events); err != nil {
-					fmt.Printf("Error unmarshaling chaincode action events:%s\n", err)
-				}
-				localTransaction.Events = events
-
-				txReadWriteSet := &rwset.TxReadWriteSet{}
-				if err := proto.Unmarshal(chaincodeAction.Results, txReadWriteSet); err != nil {
-					fmt.Printf("Error unmarshaling chaincode action results: %s\n", err)
-				}
-
-				if len(chaincodeAction.Results) != 0 {
-					for _, nsRwset := range txReadWriteSet.NsRwset {
-						nsReadWriteSet := &NsReadWriteSet{}
-						kvRWSet := &kvrwset.KVRWSet{}
-						nsReadWriteSet.Namespace = nsRwset.Namespace
-						if err := proto.Unmarshal(nsRwset.Rwset, kvRWSet); err != nil {
-							fmt.Printf("Error unmarshaling tx read write set: %s\n", err)
-						}
-						nsReadWriteSet.KVRWSet = kvRWSet
-						localTransaction.NsRwset = append(localTransaction.NsRwset, nsReadWriteSet)
-					}
-				}
-
-				// add the transaction validation a
-				addTransactionValidation(&localBlock, localTransaction, txIndex)
-
-				//append the transaction
-				localBlock.Transactions = append(localBlock.Transactions, localTransaction)
-			}
-			blockJSON, _ := json.Marshal(localBlock)
-			blockJSONString, _ := prettyprint(blockJSON)
-			fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
-			fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
-			f, _ := os.Create("./" + fileName)
-			_, _ = f.WriteString(string(blockJSONString))
+			fmt.Fprintf(f, "%s    Valid=%d Invalid=%d\n", time.Now().Local().Format(time.RFC3339), numValidTx, numInvalidTx)
 		}
 	}
 }
