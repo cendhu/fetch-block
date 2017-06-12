@@ -128,10 +128,11 @@ func copyEndorsementToLocalEndorsement(localTransaction *Transaction, allEndorse
 
 func getValueFromBlockMetadata(block *cb.Block, index cb.BlockMetadataIndex) []byte {
 	valueMetadata := &cb.Metadata{}
-	if err := proto.Unmarshal(block.Metadata.Metadata[index], valueMetadata); err != nil {
-		return nil
-	}
 	if index == cb.BlockMetadataIndex_LAST_CONFIG {
+		if err := proto.Unmarshal(block.Metadata.Metadata[index], valueMetadata); err != nil {
+			return nil
+		}
+
 		lastConfig := &cb.LastConfig{}
 		if err := proto.Unmarshal(valueMetadata.Value, lastConfig); err != nil {
 			return nil
@@ -140,6 +141,10 @@ func getValueFromBlockMetadata(block *cb.Block, index cb.BlockMetadataIndex) []b
 		binary.LittleEndian.PutUint64(b, uint64(lastConfig.Index))
 		return b
 	} else if index == cb.BlockMetadataIndex_ORDERER {
+		if err := proto.Unmarshal(block.Metadata.Metadata[index], valueMetadata); err != nil {
+			return nil
+		}
+
 		kafkaMetadata := &ab.KafkaMetadata{}
 		if err := proto.Unmarshal(valueMetadata.Value, kafkaMetadata); err != nil {
 			return nil
@@ -147,6 +152,8 @@ func getValueFromBlockMetadata(block *cb.Block, index cb.BlockMetadataIndex) []b
 		b := make([]byte, 8)
 		binary.LittleEndian.PutUint64(b, uint64(kafkaMetadata.LastOffsetPersisted))
 		return b
+	} else if index == cb.BlockMetadataIndex_TRANSACTIONS_FILTER {
+		return block.Metadata.Metadata[index]
 	}
 	return valueMetadata.Value
 }
@@ -183,7 +190,7 @@ func getSignatureHeaderFromBlockData(header *cb.SignatureHeader) *SignatureHeade
 // This method add transaction validation information from block TransactionFilter struct
 func addTransactionValidation(block *Block, tran *Transaction, txIdx int) error {
 	if len(block.TransactionFilter) > txIdx {
-		tran.ValidationCode = block.TransactionFilter[txIdx]
+		tran.ValidationCode = uint8(block.TransactionFilter[txIdx])
 		tran.ValidationCodeName = pb.TxValidationCode_name[int32(tran.ValidationCode)]
 		return nil
 	}
@@ -232,10 +239,12 @@ func processBlock(blockEvent *pb.Event_Block) {
 	lastConfigBlockNumber.LastConfigBlockNum = binary.LittleEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG))
 	lastConfigBlockNumber.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_LAST_CONFIG)
 	localBlock.LastConfigBlockNumber = lastConfigBlockNumber
+
 	txBytes := getValueFromBlockMetadata(block, cb.BlockMetadataIndex_TRANSACTIONS_FILTER)
 	for index, b := range txBytes {
-		localBlock.TransactionFilter[index] = uint8(b)
+		localBlock.TransactionFilter[index] = b
 	}
+
 	ordererKafkaMetadata := &OrdererMetadata{}
 	ordererKafkaMetadata.LastOffsetPersisted = binary.BigEndian.Uint64(getValueFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER))
 	ordererKafkaMetadata.SignatureData, _ = getSignatureHeaderFromBlockMetadata(block, cb.BlockMetadataIndex_ORDERER)
@@ -296,7 +305,6 @@ func processBlock(blockEvent *pb.Event_Block) {
 			LatencyNs:              now.Sub(subTime).Nanoseconds(),
 		})
 		// Performance measurement code ends
-
 		localTransaction.ChannelHeader = localChannelHeader
 		localSignatureHeader := &cb.SignatureHeader{}
 		if err := proto.Unmarshal(payload.Header.SignatureHeader, localSignatureHeader); err != nil {

@@ -8,13 +8,13 @@ peer:
 msp:
     #path contains the absolute path to the msp configuration files such
     #as key, cacerts, rootcerts. For dev mode, use peer0-msp-for-dev
-    path: /root/git/src/github.com/hyperledger/fabric/fetch-block/peer0-msp-for-e2e
+    path: /root/git/src/github.com/hyperledger/fabric/fetch-block/src/peer0-msp-for-dev
     #localMspId denotes the MSP identity. For dev mode, use DEFAULT instead
     #of Org0MSP   
-    localMspId: Org0MSP
+    localMspId: DEFAULT 
 tls:
     #disable tls for dev mode
-    enabled: true 
+    enabled: false 
     cert:
         file: /root/git/src/github.com/hyperledger/fabric/fetch-block/peer0-msp-for-e2e/signcerts/peer0Signer.pem
     key:
