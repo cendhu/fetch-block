@@ -14,7 +14,6 @@ import (
 	"sync"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
 	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
 	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	cb "github.com/hyperledger/fabric/protos/common"
@@ -277,11 +276,7 @@ func processBlock(blockEvent *pb.Event_Block) {
 		copyChannelHeaderToLocalChannelHeader(localChannelHeader, chHeader, headerExtension)
 
 		// Performance measurement code starts
-		subTime, err := ptypes.Timestamp(localChannelHeader.Timestamp)
-		if err != nil {
-			fmt.Printf("Error converting submission timestamp from protobuf.Timestamp to time.Time: %+v\n", err)
-			subTime = now
-		}
+		subTime := time.Unix(localChannelHeader.Timestamp.Seconds, int64(localChannelHeader.Timestamp.Nanos)).UTC()
 
 		validationCode := localBlock.TransactionFilter[txIndex]
 		validationCodeName := pb.TxValidationCode_name[int32(validationCode)]
