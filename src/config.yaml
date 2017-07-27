@@ -8,18 +8,18 @@ peer:
 msp:
     #path contains the absolute path to the msp configuration files such
     #as key, cacerts, rootcerts. For dev mode, use peer0-msp-for-dev
-    path: /root/git/src/github.com/hyperledger/fabric/fetch-block/src/peer0-msp-for-dev
+    path: /full/path/to/crypto-config/peerOrganizations/org0.example.com/users/Admin@org0.example.com/msp
     #localMspId denotes the MSP identity. For dev mode, use DEFAULT instead
     #of Org0MSP   
-    localMspId: DEFAULT 
+    localMspId: Org0MSP 
 tls:
     #disable tls for dev mode
     enabled: false 
     cert:
-        file: /root/git/src/github.com/hyperledger/fabric/fetch-block/peer0-msp-for-e2e/signcerts/peer0Signer.pem
+        file: /full/path/to/crypto-config/peerOrganizations/org0.example.com/users/Admin@org0.example.com/tls/server.crt
     key:
-        file: /root/git/src/github.com/hyperledger/fabric/fetch-block/peer0-msp-for-e2e/keystore/peer0Signer.pem
+        file: /full/path/to/crypto-config/peerOrganizations/org0.example.com/users/Admin@org0.example.com/tls/server.key
     rootcert:        
-        file: /root/git/src/github.com/hyperledger/fabric/fetch-block/peer0-msp-for-e2e/cacerts/peerOrg0.pem
+        file: /full/path/to/crypto-config/peerOrganizations/org0.example.com/users/Admin@org0.example.com/tls/ca.crt
     serverhostoverride: peer0       
 

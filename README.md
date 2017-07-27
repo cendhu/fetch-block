@@ -1,12 +1,13 @@
-Clone the fetch-block repo to ```$ $GOPATH/src/github.com/hyperledger/fabrici/``` using ```git clone https://github.com/cendhu/fetch-block``
+Clone the fetch-block to ```$GOPATH/src```
+
+```cd $GOPATH/src```
+```git clone https://github.com/cendhu/fetch-block``
 
 To compile the fetch-block tool, run the following command
 
-```$ cd fabric/fetch-block```
+```$ cd fetch-block/src```
 
-```$ go build```
-
-If compilation fails, make sure that fabric/ is placed in ```$ $GOPATH/src/github.com/hyperledger/fabric```
+```$ make```
 
 After successful compilation, we can run the tool using ```$ ./fetch-block``` 
 
