@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	"sync"
@@ -398,6 +399,9 @@ func main() {
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")
 	viper.AddConfigPath(".")
+	viper.SetEnvPrefix("FB")
+	viper.AutomaticEnv()
+	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Fatol error when read config file: err %s\n", err)
 	}
