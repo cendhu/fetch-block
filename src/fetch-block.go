@@ -29,6 +29,7 @@ import (
 
 var expName string // folder of this name is created where all data goes
 var interestedEvents []*pb.Interest
+var log_event, log_block, log_blockperf bool = false, false, false
 
 //eventAdapter must implement GetInterestedEvents(), Recv() and Disconnect()
 //which will be called by EventClient.
@@ -375,20 +376,25 @@ func processBlock(blockEvent *pb.Event_Block) {
 		//append the transaction
 		localBlock.Transactions = append(localBlock.Transactions, localTransaction)
 	}
-	blockJSON, _ := json.Marshal(localBlock)
-	blockJSONString, _ := prettyprint(blockJSON)
-	fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
-	fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
-	f, _ := os.Create(expName + "/" + fileName)
-	_, _ = f.WriteString(string(blockJSONString))
-	f.Close()
+	if log_block {
+		blockJSON, _ := json.Marshal(localBlock)
+		blockJSONString, _ := prettyprint(blockJSON)
+		fmt.Printf("Received Block [%d] from ChannelId [%s]", localBlock.Header.Number, localBlock.Transactions[0].ChannelHeader.ChannelId)
+		fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
+		f, _ := os.Create(expName + "/" + fileName)
+		_, _ = f.WriteString(string(blockJSONString))
+		f.Close()
+	}
 
-	blockPerf.BlockDurationNs = blockPerf.TxPerfs[0].LatencyNs
-	blockPerfJSON, _ := json.Marshal(blockPerf)
-	blockPerfJSONString, _ := prettyprint(blockPerfJSON)
-	f, _ = os.Create(expName + "/perf_" + fileName)
-	f.WriteString(string(blockPerfJSONString))
-	f.Close()
+	if log_blockperf {
+		blockPerf.BlockDurationNs = blockPerf.TxPerfs[0].LatencyNs
+		blockPerfJSON, _ := json.Marshal(blockPerf)
+		blockPerfJSONString, _ := prettyprint(blockPerfJSON)
+		fileName := localBlock.Transactions[0].ChannelHeader.ChannelId + "_blk#" + strconv.FormatUint(localBlock.Header.Number, 10) + ".json"
+		f, _ := os.Create(expName + "/perf_" + fileName)
+		f.WriteString(string(blockPerfJSONString))
+		f.Close()
+	}
 }
 
 func main() {
@@ -426,6 +432,13 @@ func main() {
 	if err != nil {
 		fmt.Printf("Fatal error when setting up MSP from directory: err %s\n", err)
 	}
+	log_event = viper.GetBool("log.event")
+	log_block = viper.GetBool("log.block")
+	log_blockperf = viper.GetBool("log.blockperf")
+	fmt.Printf("Log:\n")
+	fmt.Printf("  Event: %v\n", log_event)
+	fmt.Printf("  Block: %v\n", log_block)
+	fmt.Printf("  Blockperf: %v\n", log_blockperf)
 
 	event := &pb.Interest{EventType: pb.EventType_BLOCK}
 	//for receiving blocks from specific channel, we can
@@ -446,7 +459,9 @@ func main() {
 	for {
 		select {
 		case blockEvent := <-adapter.block_channel:
-			fmt.Println("Got a block. Processing.")
+			if log_event {
+				fmt.Println("Got a block. Processing.")
+			}
 			go processBlock(blockEvent)
 		case <-secondTicker.C:
 			numValidTx := 0
