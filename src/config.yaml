@@ -22,4 +22,7 @@ tls:
     rootcert:        
         file: /full/path/to/crypto-config/peerOrganizations/org0.example.com/users/Admin@org0.example.com/tls/ca.crt
     serverhostoverride: peer0       
-
+log:
+    event: true
+    block: true
+    blockperf: true
